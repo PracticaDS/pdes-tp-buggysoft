@@ -1,5 +1,5 @@
 # pdes-tp-buggysoft
-
+[![Build Status](https://travis-ci.org/PracticaDS/pdes-tp-buggysoft.svg?branch=master)](https://travis-ci.org/PracticaDS/pdes-tp-buggysoft)
 ## Project setup
 ```
 npm install
