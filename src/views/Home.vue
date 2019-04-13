@@ -1,18 +1,22 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img height="200px" alt="Buggysoft logo" src="../assets/buggysoft-logo.png">
+    <Factory :columns="columnCount" :rows="rowCount"/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import { mapState } from 'vuex';
+import Factory from '@/components/Factory.vue';
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
+    Factory,
   },
+  computed: mapState([
+    'rowCount',
+    'columnCount',
+  ]),
 };
 </script>
