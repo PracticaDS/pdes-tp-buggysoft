@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img height="200px" alt="Buggysoft logo" src="../assets/buggysoft-logo.png">
-    <Factory :columns="columnCount" :rows="rowCount"/>
+    <Factory :rows="rows"/>
   </div>
 </template>
 
@@ -15,8 +15,7 @@ export default {
     Factory,
   },
   computed: mapState([
-    'rowCount',
-    'columnCount',
+    'rows',
   ]),
 };
 </script>
