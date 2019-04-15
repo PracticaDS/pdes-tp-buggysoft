@@ -1,6 +1,6 @@
 <template>
   <div class="row" :style="style">
-    <Cell v-for="column in Array(columns).keys()" :position="[number, column]" :key="column"/>
+    <Cell v-for="(column, index) in columns" :position="[number, index]" :key="index"/>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   },
   props: {
     number: Number,
-    columns: Number,
+    columns: Array,
   },
   data() {
     return {

@@ -1,6 +1,6 @@
 <template>
   <div class="grid">
-    <Row v-for="row in Array(rows).keys()" :key="row" :number="row" :columns="columns"/>
+    <Row v-for="(row, index) in rows" :number="index" :key="index"  :columns="row"/>
   </div>
 </template>
 
@@ -13,8 +13,7 @@ export default {
     Row,
   },
   props: {
-    columns: Number,
-    rows: Number,
+    rows: Array,
   },
 };
 </script>
