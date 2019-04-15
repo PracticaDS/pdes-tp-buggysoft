@@ -11,5 +11,5 @@ cache:
 install:
   - npm ci
 script:
-  - npm test
-  - $(npm bin)/cypress run --record
+  - npm test:unit
+  - $(npm bin)/cypress run
