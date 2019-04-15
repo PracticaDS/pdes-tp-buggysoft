@@ -10,6 +10,8 @@ cache:
     - ~/.cache
 install:
   - npm ci
+before_script:
+  - npm i -g vue-cli
 script:
-  - npm test:unit
-  - $(npm bin)/cypress run
+  - npm run test:unit
+  - npm run test:e2e -- --headless
