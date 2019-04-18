@@ -8,6 +8,7 @@ export const COLUMNS = 8;
 Vue.use(Vuex);
 
 export const state = {
+  earnings: 0,
   rowCount: ROWS,
   columnCount: COLUMNS,
   rows: getRows(ROWS, COLUMNS),
