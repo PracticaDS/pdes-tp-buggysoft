@@ -18,7 +18,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .cell {
   width: 5vw;
   height: 5vw;
