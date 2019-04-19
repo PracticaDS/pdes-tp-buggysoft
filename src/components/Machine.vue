@@ -8,9 +8,14 @@ export default {
   props: {
     machine: Object,
   },
+  data() {
+    return {
+      publicPath: process.env.BASE_URL,
+    };
+  },
   computed: {
     iconUrl() {
-      return `/machines/${this.machine.icon}`;
+      return `${this.publicPath}machines/${this.machine.icon}`;
     },
   },
 };

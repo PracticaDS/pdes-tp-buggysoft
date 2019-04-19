@@ -12,13 +12,13 @@
     <p class="text-primary hp1">Edición</p>
     <div class="section no-padding">
       <Button>
-        <img src="/actions/remove.png" alt="">
+        <img :src="`${publicPath}actions/remove.png`" alt="">
       </Button>
       <Button>
-        <img src="/actions/move.png" alt="">
+        <img :src="`${publicPath}actions/move.png`" alt="">
       </Button>
       <Button>
-        <img src="/actions/rotate.png" alt="">
+        <img :src="`${publicPath}actions/rotate.png`" alt="">
       </Button>
     </div>
   </div>
@@ -33,6 +33,11 @@ export default {
   components: {
     Button,
     Machine,
+  },
+  data() {
+    return {
+      publicPath: process.env.BASE_URL,
+    };
   },
   computed: mapState([
     'machines',
