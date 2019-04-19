@@ -1,0 +1,48 @@
+<template>
+  <div class="toolbar">
+    <p class="text-primary hp1">Maquinas</p>
+    <div class="section no-padding">
+      <Button v-for="machine in machines"
+        :key="machine.name"
+        @click="setCurrentMachine(machine)">
+        <Machine :machine="machine"/>
+      </Button>
+    </div>
+    <br>
+    <p class="text-primary hp1">Edición</p>
+    <div class="section no-padding">
+      <Button>
+        <img src="/actions/remove.png" alt="">
+      </Button>
+      <Button>
+        <img src="/actions/move.png" alt="">
+      </Button>
+      <Button>
+        <img src="/actions/rotate.png" alt="">
+      </Button>
+    </div>
+  </div>
+</template>
+<script>
+import { mapState, mapMutations } from 'vuex';
+import Machine from '@/components/Machine.vue';
+import Button from '@/components/Button.vue';
+
+export default {
+  name: 'ToolBox',
+  components: {
+    Button,
+    Machine,
+  },
+  computed: mapState([
+    'machines',
+  ]),
+  methods: {
+    ...mapMutations([
+      'setCurrentMachine',
+    ]),
+  },
+};
+</script>
+<style lang="scss">
+</style>

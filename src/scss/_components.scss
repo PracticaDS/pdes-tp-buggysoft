@@ -1,0 +1,23 @@
+.label {
+  background-color: $button-background;
+  line-height: 2;
+  padding: 4px;
+}
+
+.section {
+  background-color: $neutral-color;
+  color: $button-background;
+  padding: 1em;
+  border: 2px solid $outline-color;
+}
+
+.toolbar {
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  .section {
+    text-align: left;
+    margin: 0 auto;
+    width: 20vw;
+  }
+}

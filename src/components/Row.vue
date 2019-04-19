@@ -27,7 +27,7 @@ export default {
 <style scoped lang="scss">
 .row {
   display: block;
-  height: calc(5vw + 2px);
+  height: calc(#{$cell-size} + 2px);
   width: 100%
 }
 </style>
