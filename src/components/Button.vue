@@ -1,0 +1,56 @@
+<template lang="html">
+  <button :class="[type, 'square-button']" @click="$emit('click')">
+    <slot></slot>
+  </button>
+</template>
+
+<script>
+export default {
+  name: 'Button',
+  props: {
+    type: String,
+  },
+};
+</script>
+
+<style lang="scss">
+  .square-button {
+    width: $cell-size;
+    min-width: 40px;
+    min-height: 40px;
+    height: $cell-size;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    margin: 0.5em;
+    border: 1px solid $neutral-color;
+    font-size: 24px;
+    vertical-align: middle;
+    background-color: $neutral-color;
+    padding: 0;
+    transition: transform 0.1s ease-in;
+
+    &.rounded {
+      border-radius: 8px;
+      background-color: $button-background;
+      &:hover {
+        background-color: lighten($background-color, 10);
+      }
+    }
+    &:hover {
+      transform: scale(1.2, 1.2);
+    }
+    &:focus, &:active {
+      background-color: $primary-color;
+      border: 1px solid $primary-color;
+      outline: 1px solid $primary-color;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+</style>

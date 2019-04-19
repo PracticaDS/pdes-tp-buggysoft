@@ -24,6 +24,6 @@ export default {
   width: auto;
   height: auto;
   margin: 0 auto;
-  border: 1px solid #c2c8d4;
+  border: 1px solid $outline-color;
 }
 </style>

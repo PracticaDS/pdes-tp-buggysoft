@@ -1,30 +1,40 @@
 <template>
-  <div class="cell" :style="style">
+  <div class="cell" @click="setCurrentMachine(machine)">
+    <Machine v-if="machine.name" :machine="machine" />
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+import Machine from './Machine.vue';
+
 export default {
   name: 'Cell',
+  components: {
+    Machine,
+  },
   props: {
-    machine: Object,
+    machine: {
+      type: Object,
+      default: () => ({}),
+    },
     position: Array,
   },
-  data() {
-    return {
-      style: {},
-    };
+  methods: {
+    ...mapMutations([
+      'setCurrentMachine',
+    ]),
   },
 };
 </script>
 
 <style lang="scss">
 .cell {
-  width: 5vw;
-  height: 5vw;
+  width: $cell-size;
+  height: $cell-size;
   display: inline-block;
   background-color: #f0f2ff;
-  border: 1px solid #c2c8d4;
+  border: 1px solid $outline-color;
 
   &:hover {
     border-color: lighten(orange, 15);
