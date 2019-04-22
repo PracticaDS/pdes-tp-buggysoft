@@ -7,9 +7,45 @@ export const COLUMNS = 12;
 
 Vue.use(Vuex);
 
+export const mutations = {
+  setCurrentMachine(state, machine) {
+    state.currentMachine = machine;
+    state.action = 'place';
+  },
+  setCellMachine(state, cell) {
+    const [row, column] = cell;
+    Vue.set(state.rows[row], column, state.currentMachine);
+  },
+  setAction(state, action) {
+    state.action = action;
+  },
+};
+
+export const actions = {
+  applyActionToCell({ commit, state }, cell) {
+    state.cellActions[state.action]({ commit, state }, cell);
+  },
+  place({ commit, state }, cell) {
+    const [row, column] = cell;
+    const machine = state.rows[row][column];
+    if (machine.name) {
+      commit('setCurrentMachine', machine);
+    } else {
+      commit('setCellMachine', cell);
+    }
+  },
+};
+
 export const state = {
   earnings: 1000,
   currentMachine: {},
+  action: 'place',
+  cellActions: {
+    place: actions.place,
+    remove: () => {},
+    move: () => {},
+    rotate: () => {},
+  },
   machines: [
     {
       name: 'Starter',
@@ -44,14 +80,6 @@ export const state = {
   ],
   rows: getRows(ROWS, COLUMNS),
 };
-
-export const mutations = {
-  setCurrentMachine(state, machine) {
-    state.currentMachine = machine;
-  },
-};
-
-export const actions = {};
 
 export const modules = {};
 
