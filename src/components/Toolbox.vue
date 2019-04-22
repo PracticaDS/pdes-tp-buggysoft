@@ -11,13 +11,13 @@
     <br>
     <p class="text-primary hp1">Edición</p>
     <div class="section no-padding">
-      <Button>
+      <Button @click="setAction('remove')" :type="action === 'remove' ? 'active' : ''">
         <img :src="`${publicPath}actions/remove.png`" alt="">
       </Button>
-      <Button>
+      <Button @click="setAction('move')" :type="action === 'move' ? 'active' : ''">
         <img :src="`${publicPath}actions/move.png`" alt="">
       </Button>
-      <Button>
+      <Button @click="setAction('rotate')" :type="action === 'rotate' ? 'active' : ''">
         <img :src="`${publicPath}actions/rotate.png`" alt="">
       </Button>
     </div>
@@ -41,10 +41,12 @@ export default {
   },
   computed: mapState([
     'machines',
+    'action',
   ]),
   methods: {
     ...mapMutations([
       'setCurrentMachine',
+      'setAction',
     ]),
   },
 };
