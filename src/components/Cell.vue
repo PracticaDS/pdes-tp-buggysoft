@@ -1,6 +1,6 @@
 <template>
   <div class="cell" @click="applyActionToCell(position)">
-    <Machine v-if="machine.name" :machine="machine" />
+    <Machine v-if="content.machine.name" :machine="content.machine" />
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
     ...mapState([
       'rows',
     ]),
-    machine() {
+    content() {
       const [row, column] = this.position;
       return this.rows[row][column] || {};
     },

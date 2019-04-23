@@ -8,7 +8,9 @@ export default {
   props: {
     machine: {
       type: Object,
-      default: {},
+      default() {
+        return {};
+      },
     },
   },
   data() {
