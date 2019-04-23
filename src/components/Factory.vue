@@ -15,6 +15,24 @@ export default {
   props: {
     rows: Array,
   },
+  methods: {
+    gameLoop() {
+      console.log('Tick');
+      if (this.$store.state.running) {
+        this.rows.forEach((row) => {
+          row.forEach((cell) => {
+            if (cell.machine.tick) {
+              cell.machine.tick();
+            }
+          });
+        });
+      }
+      setTimeout(this.gameLoop.bind(this), this.$store.state.tickDelay);
+    },
+  },
+  mounted() {
+    this.gameLoop();
+  },
 };
 </script>
 
