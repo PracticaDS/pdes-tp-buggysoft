@@ -12,9 +12,15 @@ export const mutations = {
     state.currentMachine = machine;
     state.action = 'place';
   },
+  clearCurrentMachine(state) {
+    state.currentMachine = {};
+  },
   setCellMachine(state, cell) {
     const [row, column] = cell;
     Vue.set(state.rows[row], column, state.currentMachine);
+  },
+  buyMachine(state, machine) {
+    state.earnings -= machine.cost;
   },
   setAction(state, action) {
     state.action = action;
@@ -25,12 +31,17 @@ export const actions = {
   applyActionToCell({ commit, state }, cell) {
     state.cellActions[state.action]({ commit, state }, cell);
   },
+  setAction({ commit }, action) {
+    commit('setAction', action);
+    commit('clearCurrentMachine');
+  },
   place({ commit, state }, cell) {
     const [row, column] = cell;
-    const machine = state.rows[row][column];
-    if (machine.name) {
-      commit('setCurrentMachine', machine);
-    } else {
+    const existingMachine = state.rows[row][column];
+    if (existingMachine.name) {
+      commit('setCurrentMachine', existingMachine);
+    } else if (state.currentMachine.cost <= state.earnings) {
+      commit('buyMachine', state.currentMachine);
       commit('setCellMachine', cell);
     }
   },

@@ -1,5 +1,5 @@
 <template lang="html">
-  <button :class="[type, 'square-button']" @click="$emit('click')">
+  <button :class="[type, disabled ? 'disabled' : '', 'square-button']" @click="handleClick">
     <slot></slot>
   </button>
 </template>
@@ -9,6 +9,14 @@ export default {
   name: 'Button',
   props: {
     type: String,
+    disabled: Boolean,
+  },
+  methods: {
+    handleClick() {
+      if (!this.disabled) {
+        this.$emit('click');
+      }
+    },
   },
 };
 </script>
@@ -46,6 +54,14 @@ export default {
       background-color: $primary-color;
       border: 1px solid $primary-color;
       outline: 1px solid $primary-color;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      background-color: $neutral-color;
+      border: 1px solid $neutral-color;
+      outline: none;
+      cursor: not-allowed;
     }
 
     img {
