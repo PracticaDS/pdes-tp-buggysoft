@@ -6,7 +6,10 @@
 export default {
   name: 'Machine',
   props: {
-    machine: Object,
+    machine: {
+      type: Object,
+      default: {},
+    },
   },
   data() {
     return {
