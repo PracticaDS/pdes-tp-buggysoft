@@ -6,7 +6,10 @@
 export default {
   name: 'Machine',
   props: {
-    machine: Object,
+    machine: {
+      type: Object,
+      default: {},
+    },
   },
   data() {
     return {
@@ -21,7 +24,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 .machine {
   width: 100%;
   height: auto;
