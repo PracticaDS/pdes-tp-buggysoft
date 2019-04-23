@@ -24,7 +24,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .machine {
   width: 100%;
   height: auto;
