@@ -22,7 +22,7 @@ export default {
     ]),
     content() {
       const [row, column] = this.position;
-      return this.rows[row][column] || {};
+      return this.rows[row][column] || { machine: {} };
     },
   },
   methods: {
