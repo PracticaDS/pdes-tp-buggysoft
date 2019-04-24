@@ -29,7 +29,7 @@ describe('Cell.vue', () => {
         position: [0, 1],
       },
     });
-    expect(component.vm.machine).toEqual({});
+    expect(component.vm.content.machine).toEqual({});
   });
 
   it('@click should set the currentMachine', () => {
