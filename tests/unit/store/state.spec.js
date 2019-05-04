@@ -1,6 +1,6 @@
-import { state, ROWS, COLUMNS } from '@/store';
+import { state, ROWS, COLUMNS } from '@/store/state';
 
-describe('store/index.js', () => {
+describe('store/state.js', () => {
   describe('Initial State', () => {
     it(`should have ${ROWS} rows with ${COLUMNS} columns`, () => {
       expect(state.rows).toBeInstanceOf(Array);
