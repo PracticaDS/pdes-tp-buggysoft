@@ -4,7 +4,7 @@
     <div class="section no-padding">
       <Button v-for="machine in machines"
         :key="machine.name"
-        @click="setCurrentMachine(machine)"
+        @click="pickMachineToPlace(machine)"
         :type="machine.name === currentMachine.name ? 'active' : ''"
         :disabled="machine.cost > earnings">
         <Machine :machine="machine"/>
@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapState, mapMutations } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import Machine from '@/components/Machine.vue';
 import Button from '@/components/Button.vue';
 
@@ -48,11 +48,9 @@ export default {
     'earnings',
   ]),
   methods: {
-    ...mapMutations([
-      'setCurrentMachine',
-    ]),
     ...mapActions([
       'setAction',
+      'pickMachineToPlace',
     ]),
   },
 };
