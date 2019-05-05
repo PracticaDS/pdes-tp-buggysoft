@@ -62,6 +62,9 @@ export default {
       border: 1px solid $neutral-color;
       outline: none;
       cursor: not-allowed;
+      &:hover {
+        transform: scale(1, 1);
+      }
     }
 
     img {

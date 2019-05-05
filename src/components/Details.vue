@@ -1,5 +1,5 @@
 <template>
-  <div class="toolbar">
+  <div class="details toolbar">
     <p class="text-primary hp1">Detalles</p>
     <div class="section text-small" v-if="currentMachine.name">
       <p>{{currentMachine.name}}</p>
@@ -19,3 +19,8 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+  .details {
+    font-family: $body-font;
+  }
+</style>

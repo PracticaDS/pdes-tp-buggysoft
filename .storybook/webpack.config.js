@@ -1,14 +1,28 @@
+const path = require('path');
+
 module.exports = {
   module: {
     rules: [
       {
         test: /\.scss$/,
         use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader'
+          {loader: 'vue-style-loader'},
+          {loader: 'css-loader'},
+          {
+            loader: 'sass-loader',
+            options: {
+              data: `
+                @import "@/scss/_app.scss";
+              `,
+            }
+          }
         ]
       }
     ]
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '../src/'),
+    }
   },
 }

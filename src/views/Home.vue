@@ -19,7 +19,7 @@
 <script>
 import { mapState } from 'vuex';
 import Details from '@/components/Details.vue';
-import Factory from '@/components/Factory.vue';
+import Factory from '@/components/Factory-Wrapper.vue';
 import ToolBox from '@/components/Toolbox.vue';
 
 export default {
