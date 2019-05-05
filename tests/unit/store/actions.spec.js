@@ -19,7 +19,7 @@ describe('store/actions.js', () => {
     commit = jest.fn();
     state = {
       rows: [[{ machine: {} }]],
-      currentMachine: { cost: 10 },
+      currentMachine: { name: 'Fake', cost: 10 },
       earnings: 100,
     };
   });
@@ -151,7 +151,7 @@ describe('store/actions.js', () => {
 
       actions.rotate({ commit, state }, cell);
 
-      expect(cellMachine.orientation).toBe('left');
+      expect(commit).toHaveBeenCalledWith('rotateMachineInCell', { cell, orientation: 'left' });
     });
     it('should do nothing on an empty cell', () => {
       const cell = [0, 0];

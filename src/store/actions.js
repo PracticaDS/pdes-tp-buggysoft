@@ -1,4 +1,5 @@
 import { getMachineInCell } from './helpers/rows-helper';
+import { Machine } from '@/models';
 
 export default {
   applyActionToCell({ commit, state }, cell) {
@@ -9,7 +10,7 @@ export default {
     commit('clearCurrentMachine');
   },
   pickMachineToPlace({ commit }, machine) {
-    commit('setCurrentMachine', { ...machine });
+    commit('setCurrentMachine', new Machine(machine));
     commit('setAction', 'place');
   },
   place({ commit, state }, cell) {
@@ -59,7 +60,8 @@ export default {
         down: 'left',
         left: 'up',
       };
-      existingMachine.orientation = rotations[existingMachine.orientation];
+      const orientation = rotations[existingMachine.orientation];
+      commit('rotateMachineInCell', { cell, orientation });
     } else {
       commit('setAction', 'select');
     }

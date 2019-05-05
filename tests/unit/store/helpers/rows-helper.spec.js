@@ -1,4 +1,5 @@
-import { getRow, getRows, Cell } from '@/store/helpers/rows-helper';
+import { getRow, getRows } from '@/store/helpers/rows-helper';
+import { Cell } from '@/models';
 
 describe('rows-helper.js', () => {
   describe('getRow()', () => {

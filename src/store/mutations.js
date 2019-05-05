@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { Machine } from '@/models';
 
 export default {
   setCurrentMachine(state, machine) {
@@ -16,6 +17,11 @@ export default {
   },
   buyMachine(state, machine) {
     state.earnings -= machine.cost;
+  },
+  rotateMachineInCell(state, { cell, orientation }) {
+    const [row, column] = cell;
+    const { machine } = state.rows[row][column];
+    state.rows[row][column].machine = new Machine({ ...machine, orientation });
   },
   increaseEarnings(state, value) {
     state.earnings += value;

@@ -1,6 +1,4 @@
-function Cell(machine = {}) {
-  this.machine = machine;
-}
+import { Cell } from '@/models';
 
 function getRow(columnCount) {
   return [...Array(columnCount).keys()].map(() => new Cell());
@@ -20,5 +18,5 @@ function getMachineInCell(cell, state) {
 }
 
 export {
-  getRow, getRows, getCell, getMachineInCell, Cell,
+  getRow, getRows, getCell, getMachineInCell,
 };
