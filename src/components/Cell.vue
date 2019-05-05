@@ -1,6 +1,10 @@
 <template>
   <div class="cell" @click="applyActionToCell">
-    <Machine v-if="content.machine.name" :machine="content.machine" />
+    <transition name="fade">
+      <div v-if="content.machine.name" class="machine-container">
+        <Machine :machine="content.machine" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -36,5 +40,19 @@ export default {
     border-color: lighten(orange, 15);
     background-color: lighten(orange, 43)
   }
+}
+
+.machine-container.fade-enter-active .machine,
+.machine-container.fade-enter .machine,
+.machine-container.fade-leave-to .machine {
+  transition: none;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: transform .2s ease-in, opacity .2s linear;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+  transform: scale(1.5, 1.5);
 }
 </style>
