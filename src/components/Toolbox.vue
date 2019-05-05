@@ -13,15 +13,18 @@
     <br>
     <p class="text-primary hp1">Edición</p>
     <div class="section no-padding">
-      <Button @click="setAction('remove')" :type="action === 'remove' ? 'active' : ''">
-        <img :src="`${publicPath}actions/remove.png`" alt="">
-      </Button>
-      <Button @click="setAction('move')" :type="action === 'move' ? 'active' : ''">
-        <img :src="`${publicPath}actions/move.png`" alt="">
-      </Button>
-      <Button @click="setAction('rotate')" :type="action === 'rotate' ? 'active' : ''">
-        <img :src="`${publicPath}actions/rotate.png`" alt="">
-      </Button>
+      <ActionButton
+        @click="setAction('remove')"
+        action="remove"
+        :active="action === 'remove'" />
+      <ActionButton
+        @click="setAction('move')"
+        action="move"
+        :active="action === 'move'" />
+      <ActionButton
+        @click="setAction('rotate')"
+        action="rotate"
+        :active="action === 'rotate'" />
     </div>
   </div>
 </template>
@@ -29,17 +32,14 @@
 import { mapActions, mapState } from 'vuex';
 import Machine from '@/components/Machine.vue';
 import Button from '@/components/Button.vue';
+import ActionButton from '@/components/ActionButton.vue';
 
 export default {
   name: 'ToolBox',
   components: {
+    ActionButton,
     Button,
     Machine,
-  },
-  data() {
-    return {
-      publicPath: process.env.BASE_URL,
-    };
   },
   computed: mapState([
     'currentMachine',

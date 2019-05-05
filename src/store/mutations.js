@@ -11,8 +11,14 @@ export default {
     const [row, column] = cell;
     Vue.set(state.rows[row], column, { machine: state.currentMachine });
   },
+  setActionOriginCell(state, cell) {
+    state.actionOriginCell = cell;
+  },
   buyMachine(state, machine) {
     state.earnings -= machine.cost;
+  },
+  increaseEarnings(state, value) {
+    state.earnings += value;
   },
   setAction(state, action) {
     state.action = action;
