@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Cell from '@/components/Cell.vue';
+import Cell from '@/components/Cell-Wrapper.vue';
 
 export default {
   name: 'Row',

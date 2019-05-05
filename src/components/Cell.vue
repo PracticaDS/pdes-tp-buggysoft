@@ -1,11 +1,10 @@
 <template>
-  <div class="cell" @click="applyActionToCell(position)">
+  <div class="cell" @click="applyActionToCell">
     <Machine v-if="content.machine.name" :machine="content.machine" />
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
 import Machine from './Machine.vue';
 
 export default {
@@ -14,24 +13,13 @@ export default {
     Machine,
   },
   props: {
+    content: Object,
     position: Array,
   },
-  computed: {
-    ...mapState([
-      'rows',
-    ]),
-    content() {
-      const [row, column] = this.position;
-      return this.rows[row][column] || { machine: {} };
-    },
-  },
   methods: {
-    ...mapMutations([
-      'setCurrentMachine',
-    ]),
-    ...mapActions([
-      'applyActionToCell',
-    ]),
+    applyActionToCell() {
+      this.$emit('applyActionToCell', this.position);
+    },
   },
 };
 </script>

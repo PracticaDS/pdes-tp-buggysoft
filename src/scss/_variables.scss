@@ -3,9 +3,11 @@ $background-color: #3D3A47;
 $neutral-color: #EDECE8;
 $primary-color: #FC6225;
 $accent-color: #b25266;
-$body-font: 'Press Start 2P', monospace;
 $button-background: lighten($background-color, 25);
 $outline-color: #c2c8d4;
 
 // DIMENSIONS
 $cell-size: 3vw;
+@import url(https://fonts.googleapis.com/css?family=Press+Start+2P);
+// FONTS
+$body-font: 'Press Start 2P', monospace;

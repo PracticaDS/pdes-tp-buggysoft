@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Cell from '@/components/Cell.vue';
+import { mount, createLocalVue } from '@vue/test-utils';
+import Cell from '@/components/Cell-Wrapper.vue';
 
 describe('Cell.vue', () => {
   const localVue = createLocalVue();
@@ -22,7 +22,7 @@ describe('Cell.vue', () => {
   });
 
   it('Has an empty machine by default', () => {
-    const component = shallowMount(Cell, {
+    const component = mount(Cell, {
       store,
       localVue,
       propsData: {
@@ -33,7 +33,7 @@ describe('Cell.vue', () => {
   });
 
   it('@click should set the currentMachine', () => {
-    const component = shallowMount(Cell, {
+    const component = mount(Cell, {
       store,
       localVue,
       propsData: {

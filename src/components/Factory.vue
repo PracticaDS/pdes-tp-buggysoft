@@ -14,11 +14,13 @@ export default {
   },
   props: {
     rows: Array,
+    tickDelay: Number,
+    running: Boolean,
   },
   methods: {
     gameLoop() {
       console.log('Tick');
-      if (this.$store.state.running) {
+      if (this.running) {
         this.rows.forEach((row) => {
           row.forEach((cell) => {
             if (cell.machine.tick) {
@@ -27,7 +29,7 @@ export default {
           });
         });
       }
-      setTimeout(this.gameLoop.bind(this), this.$store.state.tickDelay);
+      setTimeout(this.gameLoop.bind(this), this.tickDelay);
     },
   },
   mounted() {
