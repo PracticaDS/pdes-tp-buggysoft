@@ -5,6 +5,7 @@ export function Machine(dao) {
   this.tick = dao.tick;
   this.cost = dao.cost;
   this.speed = dao.speed;
+  this.animated = dao.animated;
 }
 
 export function Cell(machine = {}) {

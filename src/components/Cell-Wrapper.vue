@@ -2,7 +2,8 @@
   <Cell
     :position="position"
     :content="content"
-    @applyActionToCell="applyActionToCell"/>
+    @applyActionToCell="applyActionToCell"
+    @stopAnimation="stopAnimation(position)"/>
 </template>
 
 <script>
@@ -29,6 +30,7 @@ export default {
   methods: {
     ...mapMutations([
       'setCurrentMachine',
+      'stopAnimation',
     ]),
     ...mapActions([
       'applyActionToCell',

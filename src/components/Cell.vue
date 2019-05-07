@@ -2,7 +2,7 @@
   <div class="cell" @click="applyActionToCell">
     <transition name="fade">
       <div v-if="content.machine.name" class="machine-container">
-        <Machine :machine="content.machine" />
+        <Machine :machine="content.machine" @stopAnimation="$emit('stopAnimation')"/>
       </div>
     </transition>
   </div>
@@ -46,6 +46,7 @@ export default {
 .machine-container.fade-enter .machine,
 .machine-container.fade-leave-to .machine {
   transition: none;
+  animation: none;
 }
 
 .fade-enter-active, .fade-leave-active {

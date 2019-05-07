@@ -21,7 +21,12 @@ export default {
   rotateMachineInCell(state, { cell, orientation }) {
     const [row, column] = cell;
     const { machine } = state.rows[row][column];
-    state.rows[row][column].machine = new Machine({ ...machine, orientation });
+    state.rows[row][column].machine = new Machine({ ...machine, orientation, animated: true });
+  },
+  stopAnimation(state, cell) {
+    const [row, column] = cell;
+    const { machine } = state.rows[row][column];
+    state.rows[row][column].machine = new Machine({ ...machine, animated: false });
   },
   increaseEarnings(state, value) {
     state.earnings += value;
