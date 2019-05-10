@@ -1,5 +1,7 @@
 import actions from '@/store/actions';
 import { getRows } from '@/store/helpers/rows-helper';
+import { Machine } from '@/models';
+import { createMachine } from '@/models/Machine';
 
 function getMachine(overrides = {}) {
   return {
@@ -33,12 +35,12 @@ describe('store/actions.js', () => {
   });
   describe('pickMachineToPlace()', () => {
     it('should set the current machine and change the action to "place"', () => {
-      const machine = {};
+      const machine = createMachine({ name: 'Starter' });
 
       actions.pickMachineToPlace({ commit }, machine);
 
-      expect(commit).toHaveBeenCalledWith('setCurrentMachine', machine);
-      expect(commit).toHaveBeenLastCalledWith('setAction', 'place');
+      expect(commit.mock.calls[0][1]).toBeInstanceOf(Machine);
+      expect(commit).toHaveBeenCalledWith('setAction', 'place');
     });
   });
   describe('place()', () => {

@@ -5,7 +5,7 @@ describe('rows-helper.js', () => {
   describe('getRow()', () => {
     it('should return a row with 2 cells', () => {
       const COLUMNS = 2;
-      const row = getRow(COLUMNS);
+      const row = getRow(0, COLUMNS);
       expect(row).toBeInstanceOf(Array);
       expect(row.length).toBe(2);
       expect(row[0]).toBeInstanceOf(Cell);

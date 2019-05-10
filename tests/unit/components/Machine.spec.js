@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Machine from '@/components/Machine.vue';
+import { Machine } from '@/components/machines';
 
 describe('Machine.vue', () => {
   it('Has an empty machine by default', () => {

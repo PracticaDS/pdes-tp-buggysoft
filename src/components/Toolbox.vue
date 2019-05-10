@@ -30,7 +30,7 @@
 </template>
 <script>
 import { mapActions, mapState } from 'vuex';
-import Machine from '@/components/Machine.vue';
+import Machine from '@/components/machines/Machine.vue';
 import Button from '@/components/Button.vue';
 import ActionButton from '@/components/ActionButton.vue';
 

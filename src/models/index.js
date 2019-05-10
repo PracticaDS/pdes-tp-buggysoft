@@ -1,13 +1,7 @@
-export function Machine(dao) {
-  this.name = dao.name;
-  this.icon = dao.icon;
-  this.orientation = dao.orientation;
-  this.tick = dao.tick;
-  this.cost = dao.cost;
-  this.speed = dao.speed;
-  this.animated = dao.animated;
-}
+import Cell from './Cell';
+import Machine from './Machine';
 
-export function Cell(machine = {}) {
-  this.machine = machine;
-}
+export {
+  Cell,
+  Machine,
+};

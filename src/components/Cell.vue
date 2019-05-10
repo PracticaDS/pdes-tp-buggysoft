@@ -2,23 +2,31 @@
   <div class="cell" @click="applyActionToCell">
     <transition name="fade">
       <div v-if="content.machine.name" class="machine-container">
-        <Machine :machine="content.machine" @stopAnimation="$emit('stopAnimation')"/>
+        <component
+          :is="content.machine.name"
+          :machine="content.machine"
+          :action="action"
+          @stopAnimation="$emit('stopAnimation')"/>
       </div>
     </transition>
   </div>
 </template>
 
 <script>
-import Machine from './Machine.vue';
+import * as Machines from '@/components/machines';
 
 export default {
   name: 'Cell',
-  components: {
-    Machine,
-  },
+  components: { ...Machines },
   props: {
     content: Object,
     position: Array,
+    action: String,
+  },
+  computed: {
+    machineComponent() {
+      return this.content.machine.name || 'Machine';
+    },
   },
   methods: {
     applyActionToCell() {

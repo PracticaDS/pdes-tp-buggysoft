@@ -6,6 +6,7 @@
 
 <script>
 import Row from '@/components/Row.vue';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Factory',
@@ -14,17 +15,21 @@ export default {
   },
   props: {
     rows: Array,
+    rowsToCommit: Array,
     tickDelay: Number,
     running: Boolean,
   },
   methods: {
+    ...mapActions([
+      'tickCell',
+    ]),
     gameLoop() {
       console.log('Tick');
       if (this.running) {
         this.rows.forEach((row) => {
           row.forEach((cell) => {
             if (cell.machine.tick) {
-              cell.machine.tick();
+              this.tickCell(cell);
             }
           });
         });
