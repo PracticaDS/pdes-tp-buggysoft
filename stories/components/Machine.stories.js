@@ -1,7 +1,15 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from '@storybook/vue';
-import Machine from '../../src/components/Machine.vue';
-import Starter from '../../src/components/machines/Starter.vue';
+import
+{
+  Machine,
+  Starter,
+  Furnace,
+  Transporter,
+  Seller,
+  Crafter,
+} from '@/components/machines';
+import { state } from '@/store/state';
 
 storiesOf('Machine', module)
   .add('Empty machine', () => ({
@@ -9,29 +17,20 @@ storiesOf('Machine', module)
     template: '<div style="width: 50px;"><machine /></div>',
   }))
   .add('Transporter machine', () => ({
-    components: { Machine },
+    components: { Transporter },
     data() {
       return {
-        machine: { icon: 'transporter.png' },
+        machine: state.machines[3],
       };
     },
-    template: '<div style="width: 50px;"><machine :machine="machine"/></div>',
+    template: '<div style="width: 50px;"><Transporter :machine="machine"/></div>',
   }))
   .add('Starter machine', () => ({
     components: { Starter },
     data() {
       return {
-        machine: {
-          name: 'Starter',
-          cost: 100,
-          speed: 1,
-          icon: 'in.png',
-          orientation: 'up',
-          tick: () => {
-            console.log('Tick Starter');
-          },
-        },
+        machine: state.machines[0],
       };
     },
-    template: '<div style="width: 50px;"><starter :machine="machine"/></div>',
+    template: '<div style="width: 50px;"><Starter :machine="machine"/></div>',
   }));

@@ -16,7 +16,7 @@
 import Machine from './Machine.vue';
 
 export default {
-  name: 'Starter',
+  name: 'Furnace',
   mixins: [Machine],
   data() {
     return {
@@ -26,13 +26,11 @@ export default {
   },
   methods: {
     toggleSelected() {
-      if (this.action === 'select') {
-        this.selected = !this.selected;
-      }
+      this.selected = !this.selected;
     },
     selectMaterial(material) {
       this.selected = false;
-      this.machine.material = material;
+      this.$emit('configureMachine', { type: 'starter', material });
     },
   },
 };
@@ -48,10 +46,6 @@ export default {
   border-top: 2px solid lighten($panel-background, 50);
   border-radius: 6px;
   width: 82px;
-  z-index: 1;
-  box-shadow: 2px 2px 5px darkgray;
-  cursor: pointer;
-  text-align: left;
   p {
     text-transform: capitalize;
     line-height: 1.5;

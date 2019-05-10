@@ -1,5 +1,6 @@
 import { getMachineInCell } from './helpers/rows-helper';
-import { Machine } from '@/models';
+import { createMachine } from '@/models/Machine';
+import FactoryStoreAdapter from './helpers/store-adapter';
 
 export default {
   applyActionToCell({ commit, state }, cell) {
@@ -10,7 +11,7 @@ export default {
     commit('clearCurrentMachine');
   },
   pickMachineToPlace({ commit }, machine) {
-    commit('setCurrentMachine', new Machine(machine));
+    commit('setCurrentMachine', createMachine(machine));
     commit('setAction', 'place');
   },
   place({ commit, state }, cell) {
@@ -64,6 +65,15 @@ export default {
       commit('rotateMachineInCell', { cell, orientation });
     } else {
       commit('setAction', 'select');
+    }
+  },
+  tickCell(context, cell) {
+    cell.tick(FactoryStoreAdapter(context));
+  },
+  addResourceToNextCell({ state, dispatch }, { resource, nextCell }) {
+    const [row, column] = nextCell;
+    if (row < state.rows.length && column < state.rows[row].length) {
+      dispatch('commit/addResourceToCell', { resource, nextCell });
     }
   },
 };

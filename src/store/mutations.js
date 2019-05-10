@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import { Machine } from '@/models';
+import { createMachine } from '@/models/Machine';
 
 export default {
   setCurrentMachine(state, machine) {
@@ -10,7 +9,7 @@ export default {
   },
   setCellMachine(state, cell) {
     const [row, column] = cell;
-    Vue.set(state.rows[row], column, { machine: state.currentMachine });
+    state.rows[row][column].machine = state.currentMachine;
   },
   setActionOriginCell(state, cell) {
     state.actionOriginCell = cell;
@@ -21,12 +20,12 @@ export default {
   rotateMachineInCell(state, { cell, orientation }) {
     const [row, column] = cell;
     const { machine } = state.rows[row][column];
-    state.rows[row][column].machine = new Machine({ ...machine, orientation, animated: true });
+    state.rows[row][column].machine = createMachine({ ...machine, orientation, animated: true });
   },
   stopAnimation(state, cell) {
     const [row, column] = cell;
     const { machine } = state.rows[row][column];
-    state.rows[row][column].machine = new Machine({ ...machine, animated: false });
+    state.rows[row][column].machine = createMachine({ ...machine, animated: false });
   },
   increaseEarnings(state, value) {
     state.earnings += value;

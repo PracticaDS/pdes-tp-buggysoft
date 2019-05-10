@@ -6,6 +6,7 @@
 export default {
   name: 'Machine',
   props: {
+    action: String,
     machine: {
       type: Object,
       default() {

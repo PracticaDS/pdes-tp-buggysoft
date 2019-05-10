@@ -2,12 +2,14 @@
   <Cell
     :position="position"
     :content="content"
+    :action="action"
     @applyActionToCell="applyActionToCell"
     @stopAnimation="stopAnimation(position)"/>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
+import { Cell as CellModel } from '@/models';
 import Cell from './Cell.vue';
 
 export default {
@@ -21,10 +23,11 @@ export default {
   computed: {
     ...mapState([
       'rows',
+      'action',
     ]),
     content() {
       const [row, column] = this.position;
-      return this.rows[row][column] || { machine: {} };
+      return this.rows[row][column] || new CellModel();
     },
   },
   methods: {

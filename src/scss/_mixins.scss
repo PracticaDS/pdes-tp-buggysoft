@@ -47,3 +47,37 @@
     opacity: 1;
   }
 }
+
+// MATERIALS
+
+.material {
+  height: 8px;
+  width: 8px;
+  display: inline-block;
+}
+
+.oro {
+  background-color: gold;
+}
+
+.cobre {
+  background-color: #bb7547;
+}
+
+.aluminio {
+  background-color: #dae0ea;
+}
+
+.carbon {
+  background-color: black;
+}
+
+.hierro {
+  background-color: #e5dacb;
+}
+
+.options-container {
+  position: relative;
+  font-family: $body-font;
+  font-size: 8px;
+}
