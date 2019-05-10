@@ -68,7 +68,7 @@ export default {
     }
   },
   tickCell(context, cell) {
-    cell.tick(FactoryStoreAdapter(context));
+    cell.tick(context.state.resources, FactoryStoreAdapter(context));
   },
   addResourceToNextCell({ state, dispatch }, { resource, nextCell }) {
     const [row, column] = nextCell;

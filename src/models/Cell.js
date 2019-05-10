@@ -4,7 +4,7 @@ class Cell {
     this.machine = machine;
   }
 
-  tick(factoryStoreAdapter) {
+  tick(resources, factoryStoreAdapter) {
     const nextCell = Cell.getNextCell(this.position, this.machine.orientation);
     this.machine.tick(nextCell, factoryStoreAdapter);
   }

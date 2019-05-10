@@ -15,6 +15,7 @@ export default {
   },
   props: {
     rows: Array,
+    rowsToCommit: Array,
     tickDelay: Number,
     running: Boolean,
   },

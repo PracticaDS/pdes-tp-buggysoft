@@ -9,6 +9,7 @@ class Machine {
     this.speed = dao.speed;
     this.animated = dao.animated;
     this.tick = tick;
+    this.position = dao.position;
   }
 }
 
