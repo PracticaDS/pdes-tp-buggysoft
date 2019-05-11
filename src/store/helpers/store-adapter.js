@@ -1,4 +1,4 @@
-function FactoryStoreAdapter({ dispatch, commit, state }) {
+function FactoryStoreAdapter({ dispatch }) {
   return {
     addResourceToNextCell(resource, nextCell) {
       dispatch('addResourceToNextCell', { resource, nextCell });
