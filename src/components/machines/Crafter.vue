@@ -4,40 +4,52 @@
       @click="toggleSelected"
       :class="['machine', orientation, animated ? 'animated' : '']"
       :src="iconUrl" alt="">
-    <div class="options-panel" v-if="selected">
-      <p v-for="material in materials" :key="material" @click="selectMaterial(material)">
-        <span :class="['material', material]"></span> {{material}}
-      </p>
+    <div class="options-panel for-blueprint" v-if="selected">
+      <h2>Planos</h2>
+      <Blueprint
+        v-for="blueprint in blueprints"
+        :blueprint="blueprint"
+        :key="blueprint.name"
+        @click="selectBlueprint(blueprint)"
+        :selected="machine.blueprint.name === blueprint.name" />
     </div>
   </div>
 </template>
 
 <script>
 import Machine from './Machine.vue';
+import Blueprint from './Blueprint.vue';
 
 export default {
   name: 'Crafter',
   mixins: [Machine],
+  components: {
+    Blueprint,
+  },
+  props: {
+    blueprints: Array,
+  },
   data() {
     return {
       selected: false,
-      materials: ['oro', 'cobre', 'aluminio', 'carbon', 'hierro'],
     };
   },
   methods: {
     toggleSelected() {
-      this.selected = !this.selected;
+      if (this.action === 'select') {
+        this.selected = !this.selected;
+      }
     },
-    selectMaterial(material) {
+    selectBlueprint(blueprint) {
       this.selected = false;
-      this.$emit('configureMachine', { type: 'starter', material });
+      this.machine.blueprint = blueprint;
     },
   },
 };
 </script>
 
 <style lang="scss">
-.options-panel {
+.options-panel.for-blueprint {
   position: absolute;
   padding: 0 1em;
   background-color: $panel-background;
@@ -45,12 +57,13 @@ export default {
   border-right: 2px solid lighten($panel-background, 50);
   border-top: 2px solid lighten($panel-background, 50);
   border-radius: 6px;
-  width: 82px;
+  min-width: 82px;
+  width: auto;
   p {
     text-transform: capitalize;
     line-height: 1.5;
     &:hover {
-      color: $primary-color;
+      color: $neutral-color;
     }
   }
 }

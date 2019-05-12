@@ -17,6 +17,27 @@ const machines = [
   createMachine({ name: 'Furnace' }),
 ];
 
+const blueprints = [
+  {
+    name: 'Circuito',
+    cost: 10,
+    profit: 20,
+    resources: [{ material: 'cobre', qty: 2 }, { material: 'oro', qty: 1 }],
+  },
+  {
+    name: 'Cable de Cobre',
+    cost: 10,
+    profit: 20,
+    resources: [{ material: 'cobre', qty: 2 }],
+  },
+  {
+    name: 'Engranaje',
+    cost: 10,
+    profit: 20,
+    resources: [{ material: 'hierro', qty: 1 }],
+  },
+];
+
 export const state = {
   earnings: 1000,
   tickDelay: 1000,
@@ -32,6 +53,7 @@ export const state = {
     select,
   },
   machines,
+  blueprints,
   rows: getRows(ROWS, COLUMNS),
   rowsToCommit: getRows(ROWS, COLUMNS),
 };

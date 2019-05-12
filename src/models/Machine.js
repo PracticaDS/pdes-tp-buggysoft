@@ -4,11 +4,10 @@ class Machine {
     this.name = dao.name;
     this.icon = dao.icon;
     this.orientation = dao.orientation;
-    this.tick = dao.tick;
+    this.tick = dao.tick || tick;
     this.cost = dao.cost;
     this.speed = dao.speed;
     this.animated = dao.animated;
-    this.tick = tick;
     this.position = dao.position;
   }
 }
@@ -69,7 +68,9 @@ export function Crafter(dao = {}) {
   function tick() {
     console.log('Tick Crafter');
   }
-  return new Machine({ ...defaults, ...dao }, tick);
+  const machine = new Machine({ ...defaults, ...dao }, tick);
+  machine.blueprint = {};
+  return machine;
 }
 
 export function Furnace(dao = {}) {
