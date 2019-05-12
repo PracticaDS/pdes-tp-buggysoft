@@ -33,4 +33,18 @@ storiesOf('Machine', module)
       };
     },
     template: '<div style="width: 50px;"><Starter :machine="machine"/></div>',
+  }))
+  .add('Crafter machine', () => ({
+    components: { Crafter },
+    data() {
+      return {
+        machine: state.machines[2],
+      };
+    },
+    store: {
+      state: {
+        blueprints: state.blueprints,
+      },
+    },
+    template: '<div style="width: 50px;"><Crafter :machine="machine"/></div>',
   }));

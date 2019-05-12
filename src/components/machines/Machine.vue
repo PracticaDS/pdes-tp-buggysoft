@@ -31,8 +31,8 @@ export default {
     },
   },
   watch: {
-    machine(newVal) {
-      if (newVal.animated) {
+    machine(newMachine) {
+      if (newMachine.animated) {
         setTimeout(() => {
           this.$emit('stopAnimation');
         }, 225);
