@@ -9,15 +9,16 @@
       <Blueprint
         v-for="blueprint in blueprints"
         :blueprint="blueprint"
-        :key="blueprint"
-        @click="selectBlueprint(blueprint)" />
+        :key="blueprint.name"
+        @click="selectBlueprint(blueprint)"
+        :selected="machine.blueprint.name === blueprint.name" />
     </div>
   </div>
 </template>
 
 <script>
 import Machine from './Machine.vue';
-import Blueprint from './Blueprint';
+import Blueprint from './Blueprint.vue';
 
 export default {
   name: 'Crafter',
@@ -35,11 +36,13 @@ export default {
   },
   methods: {
     toggleSelected() {
-      this.selected = !this.selected;
+      if (this.action === 'select') {
+        this.selected = !this.selected;
+      }
     },
     selectBlueprint(blueprint) {
       this.selected = false;
-      this.$emit('configureMachine', { type: 'starter', blueprint });
+      this.machine.blueprint = blueprint;
     },
   },
 };

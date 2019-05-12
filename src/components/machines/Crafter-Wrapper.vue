@@ -1,5 +1,9 @@
 <template lang="html">
-  <Crafter :action="action" :machine="machine" :blueprints="blueprints" @configureMachine="configureMachine"></Crafter>
+  <Crafter
+  :action="action"
+  :machine="machine"
+  :blueprints="blueprints">
+  </Crafter>
 </template>
 
 <script>
@@ -19,12 +23,6 @@ export default {
     ...mapState([
       'blueprints',
     ]),
-  },
-  methods: {
-    configureMachine(config) {
-      this.selected = false;
-      this.$emit('configureMachine', config);
-    },
   },
 };
 </script>

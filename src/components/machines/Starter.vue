@@ -47,7 +47,9 @@ export default {
   border-right: 2px solid lighten($panel-background, 50);
   border-top: 2px solid lighten($panel-background, 50);
   border-radius: 6px;
-  width: 82px;
+  min-width: 82px;
+  font-size: 9px;
+  white-space: nowrap;
   z-index: 1;
   box-shadow: 2px 2px 5px darkgray;
   cursor: pointer;

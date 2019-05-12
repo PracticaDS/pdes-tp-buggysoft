@@ -6,3 +6,5 @@ class Blueprint {
     this.profit = dao.profit;
   }
 }
+
+export default Blueprint;

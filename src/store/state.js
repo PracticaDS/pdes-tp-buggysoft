@@ -25,10 +25,16 @@ const blueprints = [
     resources: [{ material: 'cobre', qty: 2 }, { material: 'oro', qty: 1 }],
   },
   {
-    name: 'Cable',
+    name: 'Cable de Cobre',
     cost: 10,
     profit: 20,
     resources: [{ material: 'cobre', qty: 2 }],
+  },
+  {
+    name: 'Engranaje',
+    cost: 10,
+    profit: 20,
+    resources: [{ material: 'hierro', qty: 1 }],
   },
 ];
 

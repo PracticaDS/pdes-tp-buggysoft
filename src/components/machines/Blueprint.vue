@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="blueprint">
-    <h4 class="label">{{blueprint.name}}</h4>
-    <div v-for="resource in blueprint.resources" class="resource">
+  <div :class="['blueprint', selected ? 'selected' : '']" @click="$emit('click')">
+    <h4 :class="['label', selected ? 'selected' : '']">{{blueprint.name}}</h4>
+    <div v-for="resource in blueprint.resources" :key="resource.material" class="resource">
       <span :class="['material', resource.material]"></span> {{resource.material}}
       <span class="qty"> x{{ resource.qty }}</span>
     </div>
@@ -16,6 +16,7 @@ export default {
   name: 'Blueprint',
   props: {
     blueprint: Object,
+    selected: Boolean,
   },
 };
 </script>
@@ -29,15 +30,33 @@ export default {
   border-right: 2px solid lighten($panel-background, 40);
   border-top: 2px solid lighten($panel-background, 40);
 
+  &:hover, &.selected {
+    background-color: $accent-color;
+    border-right: 2px solid lighten($accent-color, 20);
+    border-top: 2px solid lighten($accent-color, 20);
+  }
+
   .label {
-    background-color: darken(orange, 5);
     padding: 4px;
     border-radius: 4px;
     margin-top: 0;
     text-align: center;
-    border-right: 2px solid lighten(orange, 15);
-    border-top: 1px solid lighten(orange, 15);
     font-size: 9px;
+    border-right: 2px solid darken($outline-color, 10);
+    border-top: 1px solid darken($outline-color, 10);
+    background-color: lightslategrey;
+
+    &.selected {
+      background-color: darken(orange, 5);
+      border-right: 2px solid lighten(orange, 15);
+      border-top: 1px solid lighten(orange, 15);
+    }
+  }
+
+  &:hover .label {
+    background-color: saturate(lighten($accent-color, 15), 20%);
+    border-right: 2px solid saturate(lighten($accent-color, 30), 20%);
+    border-top: 1px solid saturate(lighten($accent-color, 30), 20%);
   }
 
   .money {
