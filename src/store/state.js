@@ -59,4 +59,5 @@ export const state = {
   rows: getRows(ROWS, COLUMNS),
   resources: getResources(ROWS, COLUMNS),
   resourcesToCommit: getResources(ROWS, COLUMNS),
+  debug: true,
 };

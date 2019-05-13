@@ -9,6 +9,11 @@
           @stopAnimation="$emit('stopAnimation')"/>
       </div>
     </transition>
+    <div v-if="debug" class="resource-display">
+      <div v-for="(quantity, resource) in resourceCell.resources" :key="resource">
+        {{resource}}: {{quantity}}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -22,6 +27,8 @@ export default {
     content: Object,
     position: Array,
     action: String,
+    resourceCell: Object,
+    debug: Boolean,
   },
   computed: {
     machineComponent() {
@@ -43,6 +50,7 @@ export default {
   display: inline-block;
   background-color: #f0f2ff;
   border: 1px solid $outline-color;
+  position: relative;
 
   &:hover {
     border-color: lighten(orange, 15);
@@ -63,5 +71,12 @@ export default {
 .fade-enter, .fade-leave-to {
   opacity: 0;
   transform: scale(1.5, 1.5);
+}
+
+.resource-display {
+  color: black;
+  font-size: 6px;
+  position: absolute;
+  top: 0;
 }
 </style>

@@ -1,4 +1,5 @@
 import { createMachine } from '@/models/Machine';
+import Vue from 'vue';
 
 export default {
   setCurrentMachine(state, machine) {
@@ -49,7 +50,7 @@ export default {
       row.forEach((resourceCell) => {
         const [row, column] = resourceCell.position;
         if (!resourceCell.isEqualTo(state.resources[row][column])) {
-          state.resources[row][column] = resourceCell;
+          Vue.set(state.resources[row], column, resourceCell);
         }
       });
     });
