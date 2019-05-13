@@ -15,17 +15,19 @@ export default {
   },
   props: {
     rows: Array,
-    rowsToCommit: Array,
     tickDelay: Number,
     running: Boolean,
   },
   methods: {
     ...mapActions([
       'tickCell',
+      'takeResourcesSnapshot',
+      'mergeResources',
     ]),
     gameLoop() {
       console.log('Tick');
       if (this.running) {
+        this.takeResourcesSnapshot();
         this.rows.forEach((row) => {
           row.forEach((cell) => {
             if (cell.machine.tick) {
@@ -33,6 +35,7 @@ export default {
             }
           });
         });
+        this.mergeResources();
       }
       setTimeout(this.gameLoop.bind(this), this.tickDelay);
     },

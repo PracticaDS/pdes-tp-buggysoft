@@ -1,6 +1,7 @@
 import { getMachineInCell } from './helpers/rows-helper';
 import { createMachine } from '@/models/Machine';
 import FactoryStoreAdapter from './helpers/store-adapter';
+import Cell from '@/models/Cell';
 
 export default {
   applyActionToCell({ commit, state }, cell) {
@@ -49,6 +50,7 @@ export default {
       commit('setCellMachine', cell);
       commit('clearCurrentMachine');
       commit('setCellMachine', state.actionOriginCell);
+      commit('moveResourcesToCell', cell);
       commit('setActionOriginCell', null);
     }
   },
@@ -68,12 +70,16 @@ export default {
     }
   },
   tickCell(context, cell) {
-    cell.tick(context.state.resources, FactoryStoreAdapter(context));
+    cell.tick(context.state.rows, context.state.resources, FactoryStoreAdapter(context));
   },
-  addResourceToNextCell({ state, dispatch }, { resource, nextCell }) {
-    const [row, column] = nextCell;
-    if (row < state.rows.length && column < state.rows[row].length) {
-      dispatch('commit/addResourceToCell', { resource, nextCell });
-    }
+  takeResourcesSnapshot({ state, commit }) {
+    const snapshot = state.resources.map(row => row.map((cell) => {
+      const { position, resources } = cell;
+      return new Cell({ position, resources });
+    }));
+    commit('commit/updateResourcesToCommit', snapshot);
+  },
+  mergeResources({ dispatch }) {
+    dispatch('commit/mergeResources');
   },
 };

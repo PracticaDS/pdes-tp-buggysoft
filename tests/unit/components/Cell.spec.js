@@ -11,6 +11,7 @@ describe('Cell.vue', () => {
   beforeEach(() => {
     state = {
       rows: [[]],
+      resources: [[]],
     };
     actions = {
       applyActionToCell: jest.fn(),

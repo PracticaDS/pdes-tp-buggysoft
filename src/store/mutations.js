@@ -1,4 +1,5 @@
 import { createMachine } from '@/models/Machine';
+import { getCell } from '@/store/helpers/rows-helper';
 
 export default {
   setCurrentMachine(state, machine) {
@@ -10,6 +11,7 @@ export default {
   setCellMachine(state, cell) {
     const [row, column] = cell;
     state.rows[row][column].machine = state.currentMachine;
+    state.currentMachine.position = cell;
   },
   setActionOriginCell(state, cell) {
     state.actionOriginCell = cell;
@@ -38,5 +40,14 @@ export default {
   },
   stopSimulation(state) {
     state.running = false;
+  },
+  mergeResources(state, resourcesToCommit) {
+    state.resources = resourcesToCommit;
+  },
+  moveResourcesToCell(state, cell) {
+    const newCell = getCell(cell, state, 'resources');
+    const actionOriginCell = getCell(state.actionOriginCell, state, 'resources');
+    const { resources } = actionOriginCell;
+    newCell.resources = resources;
   },
 };

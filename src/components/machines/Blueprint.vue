@@ -2,7 +2,7 @@
   <div :class="['blueprint', selected ? 'selected' : '']" @click="$emit('click')">
     <h4 :class="['label', selected ? 'selected' : '']">{{blueprint.name}}</h4>
     <div v-for="resource in blueprint.resources" :key="resource.material" class="resource">
-      <span :class="['material', resource.material]"></span> {{resource.material}}
+      <span :class="['material', resource.name]"></span> {{resource.name}}
       <span class="qty"> x{{ resource.qty }}</span>
     </div>
     <p class="profit">

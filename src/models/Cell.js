@@ -1,12 +1,12 @@
 class Cell {
-  constructor(position, machine = {}) {
+  constructor({ position, machine = {}, resources = [] }) {
     this.position = position;
     this.machine = machine;
+    this.resources = resources;
   }
 
-  tick(resources, factoryStoreAdapter) {
-    const nextCell = Cell.getNextCell(this.position, this.machine.orientation);
-    this.machine.tick(nextCell, factoryStoreAdapter);
+  tick(machines, resources, factoryStoreAdapter) {
+    this.machine.tick(machines, resources, factoryStoreAdapter);
   }
 
   static getNextCell(position, orientation) {
@@ -29,6 +29,16 @@ class Cell {
       },
     };
     return movements[orientation](position);
+  }
+
+  static getCurrentCell(resources, position) {
+    const [row, column] = position;
+    return resources[row][column];
+  }
+
+  static isBetweenBoundaries(rows, position) {
+    const [row, column] = position;
+    return row < rows.length && column < rows[row].length;
   }
 }
 

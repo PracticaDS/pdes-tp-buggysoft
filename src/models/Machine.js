@@ -1,6 +1,7 @@
+import Cell from './Cell';
+
 class Machine {
   constructor(dao = {}, tick) {
-    this.resources = dao.resources || [];
     this.name = dao.name;
     this.icon = dao.icon;
     this.orientation = dao.orientation;
@@ -10,6 +11,10 @@ class Machine {
     this.animated = dao.animated;
     this.position = dao.position;
   }
+
+  static isValid(machine) {
+    return Boolean(machine && machine.name);
+  }
 }
 
 export function Starter(dao = {}) {
@@ -17,19 +22,30 @@ export function Starter(dao = {}) {
     cost: 100,
     speed: 1,
     icon: 'in.png',
-    orientation: 'up',
+    orientation: 'down',
   };
-  function tick(nextCell, factory) {
+  function tick(readMachines, readResources, factory) {
     console.log('Tick Starter');
-    if (this.resources.length === 0) {
-      this.resources.push({ material: this.material, qty: 1 });
-    } else {
-      const resource = this.resources[0];
-      factory.addResourceToNextCell(resource, nextCell);
-      this.resources = [];
+    const currentCell = Cell.getCurrentCell(readResources, this.position);
+    const nextCell = Cell.getNextCell(this.position, this.orientation);
+    const nextCellObj = Cell.getCurrentCell(readMachines, nextCell);
+
+    if (currentCell.resources.length === 0 && this.material) {
+      const resource = { name: this.material, qty: 1 };
+      factory.addResourceToCell(resource, this.position);
+    } else if (this.material) {
+      const resource = currentCell.resources[0];
+      // We don't want resources to be thrown into empty cells
+      if (Machine.isValid(nextCellObj.machine)
+        && Cell.isBetweenBoundaries(readResources, nextCell)) {
+        factory.clearCellResources(this.position);
+        factory.addResourceToCell(resource, nextCell);
+      }
     }
   }
-  return new Machine({ ...defaults, ...dao }, tick);
+  const machine = new Machine({ ...defaults, ...dao }, tick);
+  machine.material = dao.material;
+  return machine;
 }
 
 export function Seller(dao = {}) {
@@ -37,7 +53,7 @@ export function Seller(dao = {}) {
     cost: 75,
     speed: 1,
     icon: 'seller.png',
-    orientation: 'up',
+    orientation: 'down',
   };
   function tick() {
     console.log('Tick Seller');
@@ -63,7 +79,7 @@ export function Crafter(dao = {}) {
     cost: 200,
     speed: 1,
     icon: 'crafter.png',
-    orientation: 'up',
+    orientation: 'down',
   };
   function tick() {
     console.log('Tick Crafter');
@@ -78,7 +94,7 @@ export function Furnace(dao = {}) {
     cost: 100,
     speed: 1,
     icon: 'furnace.png',
-    orientation: 'up',
+    orientation: 'down',
   };
   function tick() {
     console.log('Tick Furnace');

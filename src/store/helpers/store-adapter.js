@@ -1,7 +1,10 @@
-function FactoryStoreAdapter({ dispatch }) {
+function FactoryStoreAdapter({ dispatch, commit }) {
   return {
-    addResourceToNextCell(resource, nextCell) {
-      dispatch('addResourceToNextCell', { resource, nextCell });
+    addResourceToCell(resource, cell) {
+      dispatch('commit/addResourceToCell', { resource, cell });
+    },
+    clearCellResources(cell) {
+      commit('commit/clearCellResources', cell);
     },
   };
 }

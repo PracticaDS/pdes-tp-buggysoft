@@ -22,23 +22,24 @@ const blueprints = [
     name: 'Circuito',
     cost: 10,
     profit: 20,
-    resources: [{ material: 'cobre', qty: 2 }, { material: 'oro', qty: 1 }],
+    resources: [{ name: 'cobre', qty: 2 }, { name: 'oro', qty: 1 }],
   },
   {
     name: 'Cable de Cobre',
     cost: 10,
     profit: 20,
-    resources: [{ material: 'cobre', qty: 2 }],
+    resources: [{ name: 'cobre', qty: 2 }],
   },
   {
     name: 'Engranaje',
     cost: 10,
     profit: 20,
-    resources: [{ material: 'hierro', qty: 1 }],
+    resources: [{ name: 'hierro', qty: 1 }],
   },
 ];
 
 export const state = {
+  debug: true,
   earnings: 1000,
   tickDelay: 1000,
   running: true,
@@ -55,5 +56,5 @@ export const state = {
   machines,
   blueprints,
   rows: getRows(ROWS, COLUMNS),
-  rowsToCommit: getRows(ROWS, COLUMNS),
+  resources: getRows(ROWS, COLUMNS),
 };

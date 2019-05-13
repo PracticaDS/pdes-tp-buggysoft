@@ -4,7 +4,9 @@
     :content="content"
     :action="action"
     @applyActionToCell="applyActionToCell"
-    @stopAnimation="stopAnimation(position)"/>
+    @stopAnimation="stopAnimation(position)"
+    :resources="cellResources"
+    :showResources="debug"/>
 </template>
 
 <script>
@@ -24,10 +26,16 @@ export default {
     ...mapState([
       'rows',
       'action',
+      'resources',
+      'debug',
     ]),
     content() {
       const [row, column] = this.position;
-      return this.rows[row][column] || new CellModel();
+      return this.rows[row][column] || new CellModel({ position: this.position });
+    },
+    cellResources() {
+      const [row, column] = this.position;
+      return (this.resources[row][column] || new CellModel({ position: this.position })).resources;
     },
   },
   methods: {
