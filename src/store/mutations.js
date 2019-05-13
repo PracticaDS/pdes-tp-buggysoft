@@ -39,4 +39,26 @@ export default {
   stopSimulation(state) {
     state.running = false;
   },
+  stageResourceCell(state, { cell, updatedCell }) {
+    const [row, column] = cell;
+    state.resourcesToCommit[row][column] = updatedCell;
+  },
+  commitResources(state) {
+    state.resourcesToCommit.forEach((row) => {
+      row.forEach((resourceCell) => {
+        if (resourceCell !== null) {
+          const [row, column] = resourceCell.position;
+          state.resources[row][column] = resourceCell;
+        }
+      });
+    });
+  },
+  clearStaging(state) {
+    state.resources.forEach((row) => {
+      row.forEach((cell) => {
+        const [row, column] = cell.position;
+        state.resourcesToCommit[row][column] = null;
+      });
+    });
+  },
 };

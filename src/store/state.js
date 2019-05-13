@@ -1,5 +1,5 @@
 import actions from './actions';
-import { getRows } from './helpers/rows-helper';
+import { getRows, getResources, getEmptyGrid } from './helpers/rows-helper';
 import { createMachine } from '@/models/Machine';
 
 export const ROWS = 12;
@@ -55,5 +55,6 @@ export const state = {
   machines,
   blueprints,
   rows: getRows(ROWS, COLUMNS),
-  rowsToCommit: getRows(ROWS, COLUMNS),
+  resources: getResources(ROWS, COLUMNS),
+  resourcesToCommit: getEmptyGrid(ROWS, COLUMNS),
 };
