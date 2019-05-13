@@ -1,13 +1,11 @@
-const emptyResourceObject = {
-  gold: 0,
-  copper: 0,
-  aluminum: 0,
-  carbon: 0,
-  iron: 0,
-};
-
 class ResourceCell {
-  constructor(position, resources = emptyResourceObject) {
+  constructor(position, resources = {
+    gold: 0,
+    copper: 0,
+    aluminum: 0,
+    carbon: 0,
+    iron: 0,
+  }) {
     this.position = position;
     this.resources = resources;
   }
@@ -62,6 +60,12 @@ class ResourceCell {
 
   isEqualTo(otherResourceCell) {
     return this.resources === otherResourceCell.resources;
+  }
+
+  isEmpty() {
+    return this.resources.gold === 0 && this.resources.copper === 0
+      && this.resources.aluminum === 0 && this.resources.carbon === 0
+      && this.resources.iron === 0;
   }
 }
 
