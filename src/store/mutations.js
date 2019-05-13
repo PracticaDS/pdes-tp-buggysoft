@@ -47,9 +47,17 @@ export default {
   stopSimulation(state) {
     state.running = false;
   },
-  stageResourceCell(state, { cell, updatedCell }) {
+  stageResourceAdding(state, { cell, updateToCell }) {
     const [row, column] = cell;
-    state.resourcesToCommit[row][column] = updatedCell;
+    const previousResources = state.resourcesToCommit[row][column];
+    const newResources = previousResources.addResources(updateToCell);
+    Vue.set(state.resourcesToCommit[row], column, newResources);
+  },
+  stageResourceConsumption(state, { cell, updateToCell }) {
+    const [row, column] = cell;
+    const previousResources = state.resourcesToCommit[row][column];
+    const newResources = previousResources.consumeResources(updateToCell);
+    Vue.set(state.resourcesToCommit[row], column, newResources);
   },
   commitResources(state) {
     state.resourcesToCommit.forEach((row) => {
@@ -65,7 +73,7 @@ export default {
     state.resources.forEach((row) => {
       row.forEach((cell) => {
         const [row, column] = cell.position;
-        state.resourcesToCommit[row][column] = cell.copy();
+        Vue.set(state.resourcesToCommit[row], column, cell.copy());
       });
     });
   },

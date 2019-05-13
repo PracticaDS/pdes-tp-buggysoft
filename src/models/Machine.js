@@ -27,9 +27,9 @@ export function Starter(dao = {}) {
       const ownResourceCell = resources[row][column];
       if (ownResourceCell.resources[this.material] > 0) {
         const nextCell = Cell.getNextCell(this.position, this.orientation);
-        factoryService.consumeResourcesInCell(this.position,
-          [{ material: this.material, quantity: 1 }]);
         factoryService.addResourcesInCell(nextCell,
+          [{ material: this.material, quantity: 1 }]);
+        factoryService.consumeResourcesInCell(this.position,
           [{ material: this.material, quantity: 1 }]);
       } else {
         factoryService.addResourcesInCell(this.position,
@@ -64,8 +64,21 @@ export function Transporter(dao = {}) {
     icon: 'transporter.png',
     orientation: 'down',
   };
-  function tick() {
+  function tick(resources, factoryService) {
     console.log('Tick Transporter');
+    const [row, column] = this.position;
+    const ownResourceCell = resources[row][column];
+    console.log(ownResourceCell);
+    if (!ownResourceCell.isEmpty()) {
+      const nextCell = Cell.getNextCell(this.position, this.orientation);
+      const materialsToMove = [];
+      Object.keys(ownResourceCell.resources).forEach((material) => {
+        materialsToMove.push({ material, quantity: ownResourceCell.resources[material] });
+      });
+      console.log(materialsToMove);
+      factoryService.addResourcesInCell(nextCell, materialsToMove);
+      factoryService.consumeResourcesInCell(this.position, materialsToMove);
+    }
   }
   return new Machine({ ...defaults, ...dao }, tick);
 }
