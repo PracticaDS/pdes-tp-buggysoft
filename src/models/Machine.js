@@ -23,7 +23,6 @@ export function Starter(dao = {}) {
   function tick(resources, factoryService) {
     console.log('Tick Starter');
     if (this.material) {
-      console.log(this.position);
       const [row, column] = this.position;
       const ownResourceCell = resources[row][column];
       if (ownResourceCell.resources[this.material] > 0) {

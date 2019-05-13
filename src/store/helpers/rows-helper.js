@@ -38,9 +38,6 @@ function getResourcesCell(cell, state) {
 function getMaterialConverter(materials) {
   const resourceObject = {};
 
-  console.log(resourceObject);
-  console.log(materials);
-
   materials.forEach(({ material, quantity }) => {
     if (resourceObject[material] !== undefined) {
       resourceObject[material] += quantity;
@@ -48,8 +45,6 @@ function getMaterialConverter(materials) {
       resourceObject[material] = quantity;
     }
   });
-
-  console.log(resourceObject);
 
   return resourceObject;
 }

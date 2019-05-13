@@ -21,8 +21,6 @@ class ResourceCell {
       iron: this.resources.iron,
     };
 
-    console.log(resources);
-
     Object.keys(resources).forEach((key) => {
       copiedResources[key] += resources[key];
     });
