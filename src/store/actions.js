@@ -70,10 +70,8 @@ export default {
   tickCell(context, cell) {
     cell.tick(context.state.resources, FactoryStoreAdapter(context));
   },
-  addResourceToNextCell({ state, dispatch }, { resource, nextCell }) {
-    const [row, column] = nextCell;
-    if (row < state.rows.length && column < state.rows[row].length) {
-      dispatch('commit/addResourceToCell', { resource, nextCell });
-    }
+  endTick({ commit }) {
+    commit('commitResources');
+    commit('clearStaging');
   },
 };

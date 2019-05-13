@@ -1,6 +1,7 @@
+import Cell from './Cell';
+
 class Machine {
   constructor(dao = {}, tick) {
-    this.resources = dao.resources || [];
     this.name = dao.name;
     this.icon = dao.icon;
     this.orientation = dao.orientation;
@@ -17,19 +18,30 @@ export function Starter(dao = {}) {
     cost: 100,
     speed: 1,
     icon: 'in.png',
-    orientation: 'up',
+    orientation: 'down',
   };
-  function tick(nextCell, factory) {
+  function tick(resources, factoryService) {
     console.log('Tick Starter');
-    if (this.resources.length === 0) {
-      this.resources.push({ material: this.material, qty: 1 });
+    if (this.material) {
+      const [row, column] = this.position;
+      const ownResourceCell = resources[row][column];
+      if (ownResourceCell.resources[this.material] > 0) {
+        const nextCell = Cell.getNextCell(this.position, this.orientation);
+        factoryService.consumeResourcesInCell(this.position,
+          [{ material: this.material, quantity: 1 }]);
+        factoryService.addResourcesInCell(nextCell,
+          [{ material: this.material, quantity: 1 }]);
+      } else {
+        factoryService.addResourcesInCell(this.position,
+          [{ material: this.material, quantity: 1 }]);
+      }
     } else {
-      const resource = this.resources[0];
-      factory.addResourceToNextCell(resource, nextCell);
-      this.resources = [];
+      console.log('No material selected');
     }
   }
-  return new Machine({ ...defaults, ...dao }, tick);
+  const starter = new Machine({ ...defaults, ...dao }, tick);
+  starter.material = dao.material;
+  return starter;
 }
 
 export function Seller(dao = {}) {
@@ -37,7 +49,7 @@ export function Seller(dao = {}) {
     cost: 75,
     speed: 1,
     icon: 'seller.png',
-    orientation: 'up',
+    orientation: 'down',
   };
   function tick() {
     console.log('Tick Seller');
@@ -63,7 +75,7 @@ export function Crafter(dao = {}) {
     cost: 200,
     speed: 1,
     icon: 'crafter.png',
-    orientation: 'up',
+    orientation: 'down',
   };
   function tick() {
     console.log('Tick Crafter');
@@ -78,7 +90,7 @@ export function Furnace(dao = {}) {
     cost: 100,
     speed: 1,
     icon: 'furnace.png',
-    orientation: 'up',
+    orientation: 'down',
   };
   function tick() {
     console.log('Tick Furnace');

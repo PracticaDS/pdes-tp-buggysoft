@@ -5,8 +5,7 @@ class Cell {
   }
 
   tick(resources, factoryStoreAdapter) {
-    const nextCell = Cell.getNextCell(this.position, this.machine.orientation);
-    this.machine.tick(nextCell, factoryStoreAdapter);
+    this.machine.tick(resources, factoryStoreAdapter);
   }
 
   static getNextCell(position, orientation) {

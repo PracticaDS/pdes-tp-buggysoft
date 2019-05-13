@@ -1,5 +1,6 @@
 import actions from './actions';
-import { getRows } from './helpers/rows-helper';
+import constants from '../constants';
+import { getRows, getResources } from './helpers/rows-helper';
 import { createMachine } from '@/models/Machine';
 
 export const ROWS = 12;
@@ -22,19 +23,20 @@ const blueprints = [
     name: 'Circuito',
     cost: 10,
     profit: 20,
-    resources: [{ material: 'cobre', qty: 2 }, { material: 'oro', qty: 1 }],
+    resources: [{ material: constants.copper, quantity: 2 },
+      { material: constants.gold, quantity: 1 }],
   },
   {
     name: 'Cable de Cobre',
     cost: 10,
     profit: 20,
-    resources: [{ material: 'cobre', qty: 2 }],
+    resources: [{ material: constants.copper, quantity: 2 }],
   },
   {
     name: 'Engranaje',
     cost: 10,
     profit: 20,
-    resources: [{ material: 'hierro', qty: 1 }],
+    resources: [{ material: constants.iron, quantity: 1 }],
   },
 ];
 
@@ -55,5 +57,7 @@ export const state = {
   machines,
   blueprints,
   rows: getRows(ROWS, COLUMNS),
-  rowsToCommit: getRows(ROWS, COLUMNS),
+  resources: getResources(ROWS, COLUMNS),
+  resourcesToCommit: getResources(ROWS, COLUMNS),
+  debug: true,
 };

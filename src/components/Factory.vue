@@ -22,6 +22,7 @@ export default {
   methods: {
     ...mapActions([
       'tickCell',
+      'endTick',
     ]),
     gameLoop() {
       console.log('Tick');
@@ -33,6 +34,7 @@ export default {
             }
           });
         });
+        this.endTick();
       }
       setTimeout(this.gameLoop.bind(this), this.tickDelay);
     },
