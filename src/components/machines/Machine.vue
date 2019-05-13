@@ -98,7 +98,7 @@ export default {
   }
 }
 
-@keyframes right {
+@keyframes up {
   0% {
     transform: rotate(90deg);
   }
@@ -107,7 +107,7 @@ export default {
   }
 }
 
-@keyframes up {
+@keyframes right {
   0% {
     transform: rotate(180deg);
   }
