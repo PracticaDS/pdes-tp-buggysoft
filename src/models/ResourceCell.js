@@ -21,7 +21,9 @@ class ResourceCell {
       iron: this.resources.iron,
     };
 
-    resources.keys().forEach((key) => {
+    console.log(resources);
+
+    Object.keys(resources).forEach((key) => {
       copiedResources[key] += resources[key];
     });
 
@@ -37,8 +39,8 @@ class ResourceCell {
       iron: this.resources.iron,
     };
 
-    resources.keys().forEach((key) => {
-      if (copiedResources[key] > resources[key]) {
+    Object.keys(resources).forEach((key) => {
+      if (copiedResources[key] >= resources[key]) {
         copiedResources[key] -= resources[key];
       } else {
         console.log(`Not enough ${key}`);
@@ -58,6 +60,10 @@ class ResourceCell {
     };
 
     return new ResourceCell(this.position, copiedResources);
+  }
+
+  isEqualTo(otherResourceCell) {
+    return this.resources === otherResourceCell.resources;
   }
 }
 

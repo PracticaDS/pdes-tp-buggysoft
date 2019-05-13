@@ -70,7 +70,7 @@ export default {
   tickCell(context, cell) {
     cell.tick(context.state.resources, FactoryStoreAdapter(context));
   },
-  endTick({ commit, state }) {
+  endTick({ commit }) {
     commit('commitResources');
     commit('clearStaging');
   },

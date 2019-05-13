@@ -10,6 +10,7 @@ export default {
   setCellMachine(state, cell) {
     const [row, column] = cell;
     state.rows[row][column].machine = state.currentMachine;
+    state.currentMachine.position = cell;
   },
   setActionOriginCell(state, cell) {
     state.actionOriginCell = cell;
@@ -46,8 +47,8 @@ export default {
   commitResources(state) {
     state.resourcesToCommit.forEach((row) => {
       row.forEach((resourceCell) => {
-        if (resourceCell !== null) {
-          const [row, column] = resourceCell.position;
+        const [row, column] = resourceCell.position;
+        if (!resourceCell.isEqualTo(state.resources[row][column])) {
           state.resources[row][column] = resourceCell;
         }
       });
@@ -57,7 +58,7 @@ export default {
     state.resources.forEach((row) => {
       row.forEach((cell) => {
         const [row, column] = cell.position;
-        state.resourcesToCommit[row][column] = null;
+        state.resourcesToCommit[row][column] = cell.copy();
       });
     });
   },

@@ -1,7 +1,8 @@
 import { Cell, ResourceCell } from '@/models';
 
 function getResourcesRow(rowNumber, columnCount) {
-  return [...Array(columnCount).keys()].map(columnNumber => new ResourceCell([rowNumber, columnNumber]));
+  return [...Array(columnCount).keys()].map(columnNumber => new ResourceCell([rowNumber,
+    columnNumber]));
 }
 
 function getRow(rowNumber, columnCount) {
@@ -34,14 +35,26 @@ function getResourcesCell(cell, state) {
   return state.resources[row][column];
 }
 
-function getEmptyRow(rowNumber, columnCount) {
-  return [...Array(columnCount).keys()].map(columnNumber => null);
-}
+function getMaterialConverter(materials) {
+  const resourceObject = {};
 
-function getEmptyGrid(rowCount, columnCount) {
-  return getSpecificRows(rowCount, columnCount, getEmptyRow);
+  console.log(resourceObject);
+  console.log(materials);
+
+  materials.forEach(({ material, quantity }) => {
+    if (resourceObject[material] !== undefined) {
+      resourceObject[material] += quantity;
+    } else {
+      resourceObject[material] = quantity;
+    }
+  });
+
+  console.log(resourceObject);
+
+  return resourceObject;
 }
 
 export {
-  getRow, getResourcesRow, getRows, getResources, getCell, getMachineInCell, getResourcesCell, getEmptyGrid,
+  getRow, getResourcesRow, getRows, getResources, getCell, getMachineInCell,
+  getResourcesCell, getMaterialConverter,
 };

@@ -5,8 +5,12 @@
       :class="['machine', orientation, animated ? 'animated' : '']"
       :src="iconUrl" alt="">
     <div class="options-panel" v-if="selected">
-      <p v-for="material in materials" :key="material" @click="selectMaterial(material)">
-        <span :class="['material', material]"></span> {{material}}
+      <p
+        v-for="{materialName, material} in materials"
+        :key="material"
+        @click="selectMaterial(material)"
+      >
+        <span :class="['material', materialName]"></span> {{materialName}}
       </p>
     </div>
   </div>
@@ -14,6 +18,7 @@
 
 <script>
 import Machine from './Machine.vue';
+import constants from '../../constants';
 
 export default {
   name: 'Starter',
@@ -21,7 +26,28 @@ export default {
   data() {
     return {
       selected: false,
-      materials: ['oro', 'cobre', 'aluminio', 'carbon', 'hierro'],
+      materials: [
+        {
+          materialName: 'oro',
+          material: constants.gold,
+        },
+        {
+          materialName: 'cobre',
+          material: constants.copper,
+        },
+        {
+          materialName: 'aluminio',
+          material: constants.aluminum,
+        },
+        {
+          materialName: 'carbon',
+          material: constants.carbon,
+        },
+        {
+          materialName: 'hierro',
+          material: constants.iron,
+        },
+      ],
     };
   },
   methods: {

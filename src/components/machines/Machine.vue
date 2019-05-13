@@ -52,35 +52,35 @@ export default {
   // transition: transform .2s ease-in;
 }
 
-.up {
-  transform: rotate(0deg);
-  &.animated {
-    animation: up .2s ease-in;
-  }
-}
-
-.right {
-  transform: rotate(90deg);
-  &.animated {
-    animation: right .2s ease-in;
-  }
-}
-
 .down {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
   &.animated {
     animation: down .2s ease-in;
   }
 }
 
 .left {
-  transform: rotate(270deg);
+  transform: rotate(90deg);
   &.animated {
     animation: left .2s ease-in;
   }
 }
 
-@keyframes up {
+.up {
+  transform: rotate(180deg);
+  &.animated {
+    animation: up .2s ease-in;
+  }
+}
+
+.right {
+  transform: rotate(270deg);
+  &.animated {
+    animation: right .2s ease-in;
+  }
+}
+
+@keyframes down {
   0% {
     transform: rotate(270deg);
   }
@@ -89,7 +89,7 @@ export default {
   }
 }
 
-@keyframes right {
+@keyframes left {
   0% {
     transform: rotate(0deg);
   }
@@ -98,7 +98,7 @@ export default {
   }
 }
 
-@keyframes down {
+@keyframes right {
   0% {
     transform: rotate(90deg);
   }
@@ -107,7 +107,7 @@ export default {
   }
 }
 
-@keyframes left {
+@keyframes up {
   0% {
     transform: rotate(180deg);
   }

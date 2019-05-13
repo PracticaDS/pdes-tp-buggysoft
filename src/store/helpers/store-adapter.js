@@ -1,14 +1,16 @@
-import { getResourcesCell } from './rows-helper';
+import { getResourcesCell, getMaterialConverter } from './rows-helper';
 
 function FactoryStoreAdapter({ commit, state }) {
   return {
-    putResourcesInCell(cell, resources) {
+    addResourcesInCell(cell, materials) {
       const resourcesCell = getResourcesCell(cell, state);
+      const resources = getMaterialConverter(materials);
       const updatedCell = resourcesCell.addResources(resources);
       commit('stageResourceCell', { cell, updatedCell });
     },
-    reduceResourcesIncell(cell, resources) {
+    consumeResourcesInCell(cell, materials) {
       const resourcesCell = getResourcesCell(cell, state);
+      const resources = getMaterialConverter(materials);
       const updatedCell = resourcesCell.consumeResources(resources);
       commit('stageResourceCell', { cell, updatedCell });
     },
