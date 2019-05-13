@@ -39,7 +39,9 @@ export function Starter(dao = {}) {
       console.log('No material selected');
     }
   }
-  return new Machine({ ...defaults, ...dao }, tick);
+  const starter = new Machine({ ...defaults, ...dao }, tick);
+  starter.material = dao.material;
+  return starter;
 }
 
 export function Seller(dao = {}) {
