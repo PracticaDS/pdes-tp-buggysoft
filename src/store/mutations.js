@@ -10,8 +10,14 @@ export default {
   },
   setCellMachine(state, cell) {
     const [row, column] = cell;
-    state.rows[row][column].machine = state.currentMachine;
-    state.currentMachine.position = cell;
+    if (state.action === 'place') {
+      const newMachine = createMachine(state.currentMachine);
+      state.rows[row][column].machine = newMachine;
+      newMachine.position = cell;
+    } else {
+      state.rows[row][column].machine = state.currentMachine;
+      state.currentMachine.position = cell;
+    }
   },
   setActionOriginCell(state, cell) {
     state.actionOriginCell = cell;

@@ -11,7 +11,7 @@
     </transition>
     <div v-if="debug" class="resource-display">
       <div v-for="(quantity, resource) in resourceCell.resources" :key="resource">
-        {{resource}}: {{quantity}}
+        <span :class="['material', resource]" :title="resource"></span> {{quantity}}
       </div>
     </div>
   </div>
@@ -74,9 +74,12 @@ export default {
 }
 
 .resource-display {
-  color: black;
+  color: white;
+  text-shadow: 1px 1px 1px black;
   font-size: 6px;
   position: absolute;
   top: 0;
+  cursor: pointer;
+
 }
 </style>
