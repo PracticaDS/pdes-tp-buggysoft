@@ -7,7 +7,7 @@ describe('Starter', () => {
     const factory = {
       addResourcesInCell: jest.fn(),
       consumeResourcesInCell: jest.fn(),
-    }
+    };
     const furnace = Furnace({ position: [0, 0] });
 
     furnace.tick(resources, factory);
@@ -20,15 +20,15 @@ describe('Starter', () => {
     const factory = {
       addResourcesInCell: jest.fn(),
       consumeResourcesInCell: jest.fn(),
-    }
+    };
     const furnace = Furnace({ position: [0, 0] });
 
     furnace.tick(resources, factory);
     expect(factory.addResourcesInCell).toHaveBeenCalledWith([0, 0], [{
-      material: 'processed_copper', quantity: 1
+      material: 'processed_copper', quantity: 1,
     }]);
     expect(factory.consumeResourcesInCell).toHaveBeenCalledWith([0, 0], [{
-      material: 'copper', quantity: 1
+      material: 'copper', quantity: 1,
     }]);
   });
 
@@ -37,15 +37,15 @@ describe('Starter', () => {
     const factory = {
       addResourcesInCell: jest.fn(),
       consumeResourcesInCell: jest.fn(),
-    }
+    };
     const furnace = Furnace({ position: [0, 0], orientation: 'down' });
 
     furnace.tick(resources, factory);
     expect(factory.addResourcesInCell).toHaveBeenCalledWith([1, 0], [{
-      material: 'processed_copper', quantity: 1
+      material: 'processed_copper', quantity: 1,
     }]);
     expect(factory.consumeResourcesInCell).toHaveBeenCalledWith([0, 0], [{
-      material: 'processed_copper', quantity: 1
+      material: 'processed_copper', quantity: 1,
     }]);
   });
 });

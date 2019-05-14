@@ -3,7 +3,7 @@
     <h4 :class="['label', selected ? 'selected' : '']">{{blueprint.name}}</h4>
     <div v-for="resource in blueprint.resources" :key="resource.material" class="resource">
       <span :class="['material', resource.material]"></span> {{resource.material}}
-      <span class="qty"> x{{ resource.qty }}</span>
+      <span class="qty"> x{{ resource.quantity }}</span>
     </div>
     <p class="profit">
       Ganancia <span class="money">${{Number(blueprint.profit).toFixed(2)}}</span>
