@@ -26,7 +26,13 @@ describe('Starter', () => {
       name: constants.gear.name,
       craftedResource: [{ material: constants.gear.material, quantity: 1 }],
       profit: 0,
-      resources: [{ material: constants.iron.material, quantity: 1, materialName: constants.iron.name }],
+      resources: [
+        {
+          material: constants.iron.material,
+          quantity: 1,
+          materialName: constants.iron.name,
+        },
+      ],
     };
     const crafter = Crafter({ position: [0, 0], blueprint: gearBlueprint });
 
@@ -45,7 +51,13 @@ describe('Starter', () => {
       name: constants.gear.name,
       craftedResource: [{ material: constants.gear.material, quantity: 1 }],
       profit: 0,
-      resources: [{ material: constants.iron.material, quantity: 1, materialName: constants.iron.name }],
+      resources: [
+        {
+          material: constants.iron.material,
+          quantity: 1,
+          materialName: constants.iron.name,
+        },
+      ],
     };
     const crafter = Crafter({ position: [0, 0], blueprint: gearBlueprint });
 
