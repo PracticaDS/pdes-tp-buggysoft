@@ -131,7 +131,7 @@ export function Furnace(dao = {}) {
           materialToProcess = rawMaterial;
         }
       });
-      console.log("Material to process: " + materialToProcess + " transformation: " + this.transformations[materialToProcess])
+
       factoryService.addResourcesInCell(this.position,
         [{ material: this.transformations[materialToProcess], quantity: 1 }]);
       factoryService.consumeResourcesInCell(this.position,

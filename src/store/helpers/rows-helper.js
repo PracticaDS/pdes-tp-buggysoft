@@ -39,7 +39,6 @@ function getMaterialConverter(materials) {
   const resourceObject = {};
 
   materials.forEach(({ material, quantity }) => {
-    console.log("material: " + material + " quantity " + quantity)
     if (resourceObject[material] !== undefined) {
       resourceObject[material] += quantity;
     } else {

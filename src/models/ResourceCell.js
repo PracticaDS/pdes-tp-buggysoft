@@ -67,7 +67,7 @@ class ResourceCell {
 
   hasProcessedMaterials() {
     return Object.keys(this.resources).some((material) => {
-      return material.includes('processed_');
+      return material.includes('processed_') && this.resources[material] > 0;
     });
   }
 
