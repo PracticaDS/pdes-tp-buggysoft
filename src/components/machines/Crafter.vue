@@ -1,6 +1,12 @@
 <template lang="html">
   <div class="options-container">
     <img
+      v-if="machine.ticking"
+      @click="toggleSelected"
+      :class="['machine', orientation, animated ? 'animated' : '']"
+      :src="tickIconUrl" alt="">
+    <img
+      v-else
       @click="toggleSelected"
       :class="['machine', orientation, animated ? 'animated' : '']"
       :src="iconUrl" alt="">

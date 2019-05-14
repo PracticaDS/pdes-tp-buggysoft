@@ -109,6 +109,7 @@ export function Crafter(dao = {}) {
   };
   function tick(resources, factoryService) {
     console.log('Tick Crafter');
+    this.ticking = false;
     const [row, column] = this.position;
     const ownResourceCell = resources[row][column];
     if (this.blueprint.name && ownResourceCell.hasMaterials(this.blueprint.craftedResource)) {
@@ -116,6 +117,7 @@ export function Crafter(dao = {}) {
       factoryService.addResourcesInCell(nextCell, this.blueprint.craftedResource);
       factoryService.consumeResourcesInCell(this.position, this.blueprint.craftedResource);
     } else if (this.blueprint.name && ownResourceCell.hasMaterials(this.blueprint.resources)) {
+      this.ticking = true;
       factoryService.addResourcesInCell(this.position, this.blueprint.craftedResource);
       factoryService.consumeResourcesInCell(this.position, this.blueprint.resources);
     } else {
