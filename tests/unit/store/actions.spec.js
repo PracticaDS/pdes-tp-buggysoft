@@ -2,6 +2,7 @@ import actions from '@/store/actions';
 import { getRows } from '@/store/helpers/rows-helper';
 import { Machine } from '@/models';
 import { createMachine } from '@/models/Machine';
+import { materialProfits } from '@/store/state';
 
 function getMachine(overrides = {}) {
   return {
@@ -23,6 +24,7 @@ describe('store/actions.js', () => {
       rows: [[{ machine: {} }]],
       currentMachine: { name: 'Fake', cost: 10 },
       earnings: 100,
+      materialProfits,
     };
   });
   describe('setAction()', () => {
@@ -161,6 +163,15 @@ describe('store/actions.js', () => {
       actions.rotate({ commit, state }, cell);
 
       expect(commit).toHaveBeenCalledWith('setAction', 'select');
+    });
+  });
+  describe('sellResources()', () => {
+    it('should calculate the right profit', () => {
+      const resources = [{ material: 'copper', quantity: 2 }];
+      const profit = 4;
+      actions.sellResources({ commit, state }, { resources });
+
+      expect(commit).toHaveBeenCalledWith('increaseEarnings', profit);
     });
   });
 });

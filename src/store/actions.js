@@ -1,4 +1,4 @@
-import { getMachineInCell } from './helpers/rows-helper';
+import { getMachineInCell, getProfit } from './helpers/rows-helper';
 import { createMachine } from '@/models/Machine';
 import FactoryStoreAdapter from './helpers/store-adapter';
 
@@ -73,5 +73,12 @@ export default {
   endTick({ commit }) {
     commit('commitResources');
     commit('clearStaging');
+  },
+  sellResources({ commit, state }, { resources }) {
+    const filteredResources = resources.filter(resource => resource.quantity > 0);
+    const profit = filteredResources.reduce((subtotal, resource) => (subtotal
+      + (getProfit(resource.material, state.materialProfits) * resource.quantity)
+    ), 0);
+    commit('increaseEarnings', profit);
   },
 };

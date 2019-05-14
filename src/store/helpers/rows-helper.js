@@ -49,7 +49,12 @@ function getMaterialConverter(materials) {
   return resourceObject;
 }
 
+function getProfit(materialName, materialProfits) {
+  const res = materialProfits.find(_material => _material.material === materialName);
+  return res.profit || 0;
+}
+
 export {
   getRow, getResourcesRow, getRows, getResources, getCell, getMachineInCell,
-  getResourcesCell, getMaterialConverter,
+  getResourcesCell, getMaterialConverter, getProfit,
 };

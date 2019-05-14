@@ -1,5 +1,6 @@
-import { getRow, getRows } from '@/store/helpers/rows-helper';
+import { getRow, getRows, getProfit } from '@/store/helpers/rows-helper';
 import { Cell } from '@/models';
+import { materialProfits } from '@/store/state';
 
 describe('rows-helper.js', () => {
   describe('getRow()', () => {
@@ -22,6 +23,13 @@ describe('rows-helper.js', () => {
       rows.forEach((row) => {
         expect(row).toBeInstanceOf(Array);
       });
+    });
+  });
+  describe('getProfit()', () => {
+    it('should return 2 for copper', () => {
+      const materialName = "copper";
+      const profit = getProfit(materialName, materialProfits);
+      expect(profit).toBe(2);
     });
   });
 });

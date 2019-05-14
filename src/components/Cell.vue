@@ -11,7 +11,9 @@
     </transition>
     <div v-if="debug" class="resource-display">
       <div v-for="(quantity, resource) in resourceCell.resources" :key="resource">
-        <span :class="['material', resource]" :title="resource"></span> {{quantity}}
+        <span v-if="quantity > 0">
+          <span :class="['material', resource]" :title="resource"></span> {{quantity}}
+        </span>
       </div>
     </div>
   </div>

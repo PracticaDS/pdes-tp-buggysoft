@@ -4,4 +4,7 @@ export default {
   aluminum: 'aluminum',
   carbon: 'carbon',
   iron: 'iron',
+  copperWire: 'Cable de Cobre',
+  gear: 'Engranaje',
+  circuit: 'Circuito',
 };

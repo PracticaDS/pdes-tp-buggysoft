@@ -51,8 +51,17 @@ export function Seller(dao = {}) {
     icon: 'seller.png',
     orientation: 'down',
   };
-  function tick() {
+  function tick(resources, factoryService) {
     console.log('Tick Seller');
+    const [row, column] = this.position;
+    const ownResourceCell = resources[row][column];
+    if (!ownResourceCell.isEmpty()) {
+      const cellResources = ownResourceCell.resources;
+      const resourcesToSell = Object.keys(cellResources)
+        .map(material => ({ material, quantity: cellResources[material] }));
+      factoryService.sellResources(resourcesToSell);
+      factoryService.consumeResourcesInCell(this.position, resourcesToSell);
+    }
   }
   return new Machine({ ...defaults, ...dao }, tick);
 }

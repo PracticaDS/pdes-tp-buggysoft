@@ -18,6 +18,17 @@ const machines = [
   createMachine({ name: 'Furnace' }),
 ];
 
+export const materialProfits = [
+  { material: constants.copper, profit: 2 },
+  { material: constants.iron, profit: 1 },
+  { material: constants.gold, profit: 5 },
+  { material: constants.carbon, profit: 3 },
+  { material: constants.aluminum, profit: 2 },
+  { material: constants.circuit, profit: 30 },
+  { material: constants.copperWire, profit: 10 },
+  { material: constants.gear, profit: 20 },
+];
+
 const blueprints = [
   {
     name: 'Circuito',
@@ -56,6 +67,7 @@ export const state = {
   },
   machines,
   blueprints,
+  materialProfits,
   rows: getRows(ROWS, COLUMNS),
   resources: getResources(ROWS, COLUMNS),
   resourcesToCommit: getResources(ROWS, COLUMNS),
