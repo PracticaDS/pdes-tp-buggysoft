@@ -10,30 +10,33 @@ class ResourceCell {
     this.resources = resources;
   }
 
-  addResources(resources) {
-    const copiedResources = {
-      gold: this.resources.gold,
-      copper: this.resources.copper,
-      aluminum: this.resources.aluminum,
-      carbon: this.resources.carbon,
-      iron: this.resources.iron,
+  static copyResources(resources) {
+    return {
+      gold: resources.gold,
+      copper: resources.copper,
+      aluminum: resources.aluminum,
+      carbon: resources.carbon,
+      iron: resources.iron,
+      ...resources,
     };
+  }
+
+  addResources(resources) {
+    const copiedResources = ResourceCell.copyResources(this.resources);
 
     Object.keys(resources).forEach((key) => {
-      copiedResources[key] += resources[key];
+      if (copiedResources[key]) {
+        copiedResources[key] += resources[key];
+      } else {
+        copiedResources[key] = resources[key];
+      }
     });
 
     return new ResourceCell(this.position, copiedResources);
   }
 
   consumeResources(resources) {
-    const copiedResources = {
-      gold: this.resources.gold,
-      copper: this.resources.copper,
-      aluminum: this.resources.aluminum,
-      carbon: this.resources.carbon,
-      iron: this.resources.iron,
-    };
+    const copiedResources = ResourceCell.copyResources(this.resources);
 
     Object.keys(resources).forEach((key) => {
       if (copiedResources[key] >= resources[key]) {
@@ -47,13 +50,7 @@ class ResourceCell {
   }
 
   copy() {
-    const copiedResources = {
-      gold: this.resources.gold,
-      copper: this.resources.copper,
-      aluminum: this.resources.aluminum,
-      carbon: this.resources.carbon,
-      iron: this.resources.iron,
-    };
+    const copiedResources = ResourceCell.copyResources(this.resources);
 
     return new ResourceCell(this.position, copiedResources);
   }
@@ -62,10 +59,20 @@ class ResourceCell {
     return this.resources === otherResourceCell.resources;
   }
 
-  isEmpty() {
-    return this.resources.gold === 0 && this.resources.copper === 0
+  hasRawMaterials() {
+    return !(this.resources.gold === 0 && this.resources.copper === 0
       && this.resources.aluminum === 0 && this.resources.carbon === 0
-      && this.resources.iron === 0;
+      && this.resources.iron === 0);
+  }
+
+  hasProcessedMaterials() {
+    return Object.keys(this.resources).some((material) => {
+      return material.includes('processed_');
+    });
+  }
+
+  isEmpty() {
+    return !this.hasRawMaterials() && !this.hasProcessedMaterials();
   }
 }
 

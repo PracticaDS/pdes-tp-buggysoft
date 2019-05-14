@@ -105,10 +105,50 @@ export function Furnace(dao = {}) {
     icon: 'furnace.png',
     orientation: 'down',
   };
-  function tick() {
+  function tick(resources, factoryService) {
     console.log('Tick Furnace');
+    const [row, column] = this.position;
+    const ownResourceCell = resources[row][column];
+    if (ownResourceCell.hasProcessedMaterials()) {
+      const nextCell = Cell.getNextCell(this.position, this.orientation);
+      let processedMaterial;
+
+      Object.values(this.transformations).forEach((material) => {
+        if (ownResourceCell.resources[material] > 0) {
+          processedMaterial = material;
+        }
+      });
+
+      factoryService.addResourcesInCell(nextCell,
+        [{ material: processedMaterial, quantity: 1 }]);
+      factoryService.consumeResourcesInCell(this.position,
+        [{ material: processedMaterial, quantity: 1 }]);
+    } else if (ownResourceCell.hasRawMaterials()) {
+      let materialToProcess;
+
+      Object.keys(this.transformations).forEach((rawMaterial) => {
+        if (ownResourceCell.resources[rawMaterial] > 0) {
+          materialToProcess = rawMaterial;
+        }
+      });
+      console.log("Material to process: " + materialToProcess + " transformation: " + this.transformations[materialToProcess])
+      factoryService.addResourcesInCell(this.position,
+        [{ material: this.transformations[materialToProcess], quantity: 1 }]);
+      factoryService.consumeResourcesInCell(this.position,
+        [{ material: materialToProcess, quantity: 1 }]);
+    } else {
+      console.log('No materials to process');
+    }
   }
-  return new Machine({ ...defaults, ...dao }, tick);
+  const furnace = new Machine({ ...defaults, ...dao }, tick);
+  furnace.transformations = {
+    gold: 'processed_gold',
+    copper: 'processed_copper',
+    aluminum: 'processed_aluminum',
+    carbon: 'processed_carbon',
+    iron: 'processed_iron',
+  };
+  return furnace;
 }
 
 export const machineTypes = {
