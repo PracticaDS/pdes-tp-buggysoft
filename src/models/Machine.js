@@ -1,4 +1,5 @@
 import Cell from './Cell';
+import constants from '../constants';
 
 class Machine {
   constructor(dao = {}, tick) {
@@ -91,7 +92,7 @@ export function Transporter(dao = {}) {
       Object.keys(ownResourceCell.resources).forEach((material) => {
         materialsToMove.push({ material, quantity: ownResourceCell.resources[material] });
       });
-      console.log(materialsToMove);
+
       factoryService.addResourcesInCell(nextCell, materialsToMove);
       factoryService.consumeResourcesInCell(this.position, materialsToMove);
     }
@@ -106,11 +107,23 @@ export function Crafter(dao = {}) {
     icon: 'crafter.png',
     orientation: 'down',
   };
-  function tick() {
+  function tick(resources, factoryService) {
     console.log('Tick Crafter');
+    const [row, column] = this.position;
+    const ownResourceCell = resources[row][column];
+    if (this.blueprint.name && ownResourceCell.hasMaterials(this.blueprint.craftedResource)) {
+      const nextCell = Cell.getNextCell(this.position, this.orientation);
+      factoryService.addResourcesInCell(nextCell, this.blueprint.craftedResource);
+      factoryService.consumeResourcesInCell(this.position, this.blueprint.craftedResource);
+    } else if (this.blueprint.name && ownResourceCell.hasMaterials(this.blueprint.resources)) {
+      factoryService.addResourcesInCell(this.position, this.blueprint.craftedResource);
+      factoryService.consumeResourcesInCell(this.position, this.blueprint.resources);
+    } else {
+      console.log('No blueprint selected/No materials to craft');
+    }
   }
   const machine = new Machine({ ...defaults, ...dao }, tick);
-  machine.blueprint = {};
+  machine.blueprint = dao.blueprint || {};
   return machine;
 }
 
@@ -160,11 +173,11 @@ export function Furnace(dao = {}) {
   }
   const furnace = new Machine({ ...defaults, ...dao }, tick);
   furnace.transformations = {
-    gold: 'processed_gold',
-    copper: 'processed_copper',
-    aluminum: 'processed_aluminum',
-    carbon: 'processed_carbon',
-    iron: 'processed_iron',
+    gold: constants.processed_gold.material,
+    copper: constants.processed_copper.material,
+    aluminum: constants.processed_aluminum.material,
+    carbon: constants.processed_carbon.material,
+    iron: constants.processed_iron.material,
   };
   return furnace;
 }

@@ -19,40 +19,103 @@ const machines = [
 ];
 
 export const materialProfits = [
-  { material: constants.copper, profit: 2 },
-  { material: constants.iron, profit: 1 },
-  { material: constants.gold, profit: 5 },
-  { material: constants.carbon, profit: 3 },
-  { material: constants.aluminum, profit: 2 },
-  { material: constants.circuit, profit: 30 },
-  { material: constants.copperWire, profit: 10 },
-  { material: constants.gear, profit: 20 },
-  { material: constants.processed_gold, profit: 7 },
-  { material: constants.processed_iron, profit: 3 },
-  { material: constants.processed_copper, profit: 4 },
-  { material: constants.processed_carbon, profit: 5 },
-  { material: constants.processed_aluminum, profit: 4 },
+  { material: constants.copper.material, profit: 2 },
+  { material: constants.iron.material, profit: 1 },
+  { material: constants.gold.material, profit: 5 },
+  { material: constants.carbon.material, profit: 3 },
+  { material: constants.aluminum.material, profit: 2 },
+  { material: constants.circuit.material, profit: 30 },
+  { material: constants.processingUnit.material, profit: 100 },
+  { material: constants.robot.material, profit: 500 },
+  { material: constants.copperWire.material, profit: 10 },
+  { material: constants.gear.material, profit: 20 },
+  { material: constants.processed_gold.material, profit: 7 },
+  { material: constants.processed_iron.material, profit: 3 },
+  { material: constants.processed_copper.material, profit: 4 },
+  { material: constants.processed_carbon.material, profit: 5 },
+  { material: constants.processed_aluminum.material, profit: 4 },
 ];
 
 const blueprints = [
   {
-    name: 'Circuito',
-    cost: 10,
-    profit: 20,
-    resources: [{ material: constants.copper, quantity: 2 },
-      { material: constants.gold, quantity: 1 }],
+    name: constants.circuit.name,
+    craftedResource: [{ material: constants.circuit.material, quantity: 1 }],
+    profit: materialProfits.find(element => element.material === constants.circuit.material).profit,
+    resources: [
+      {
+        material: constants.copper.material,
+        quantity: 2,
+        materialName: constants.copper.name,
+      },
+      {
+        material: constants.gold.material,
+        quantity: 1,
+        materialName: constants.gold.name,
+      },
+    ],
   },
   {
-    name: 'Cable de Cobre',
-    cost: 10,
-    profit: 20,
-    resources: [{ material: constants.copper, quantity: 2 }],
+    name: constants.copperWire.name,
+    craftedResource: [{ material: constants.copperWire.material, quantity: 1 }],
+    profit: materialProfits.find(elem => elem.material === constants.copperWire.material).profit,
+    resources: [
+      {
+        material: constants.copper.material,
+        quantity: 2,
+        materialName: constants.copper.name,
+      },
+    ],
   },
   {
-    name: 'Engranaje',
-    cost: 10,
-    profit: 20,
-    resources: [{ material: constants.iron, quantity: 1 }],
+    name: constants.gear.name,
+    craftedResource: [{ material: constants.gear.material, quantity: 1 }],
+    profit: materialProfits.find(element => element.material === constants.gear.material).profit,
+    resources: [
+      {
+        material: constants.iron.material,
+        quantity: 1,
+        materialName: constants.iron.name,
+      },
+    ],
+  },
+  {
+    name: constants.processingUnit.name,
+    craftedResource: [{ material: constants.processingUnit.material, quantity: 1 }],
+    profit: materialProfits.find(el => el.material === constants.processingUnit.material).profit,
+    resources: [
+      {
+        material: constants.circuit.material,
+        quantity: 2,
+        materialName: constants.circuit.name,
+      },
+      {
+        material: constants.processed_gold.material,
+        quantity: 1,
+        materialName: constants.processed_gold.name,
+      },
+    ],
+  },
+  {
+    name: constants.robot.name,
+    craftedResource: [{ material: constants.robot.material, quantity: 1 }],
+    profit: materialProfits.find(element => element.material === constants.robot.material).profit,
+    resources: [
+      {
+        material: constants.processed_iron.material,
+        quantity: 5,
+        materialName: constants.processed_iron.name,
+      },
+      {
+        material: constants.processingUnit.material,
+        quantity: 5,
+        materialName: constants.processingUnit.name,
+      },
+      {
+        material: constants.gear.material,
+        quantity: 5,
+        materialName: constants.gear.name,
+      },
+    ],
   },
 ];
 

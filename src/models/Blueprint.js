@@ -1,9 +1,9 @@
 class Blueprint {
   constructor(dao) {
     this.name = dao.name;
-    this.cost = dao.cost;
-    this.resources = dao.resources;
     this.profit = dao.profit;
+    this.resources = dao.resources;
+    this.craftedResource = dao.craftedResource;
   }
 }
 

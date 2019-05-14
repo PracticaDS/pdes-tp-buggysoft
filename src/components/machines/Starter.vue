@@ -16,7 +16,7 @@
         :key="material"
         @click="selectMaterial(material)"
       >
-        <span :class="['material', materialName]"></span> {{materialName}}
+        <span :class="['material', material]"></span> {{materialName}}
       </p>
     </div>
   </div>
@@ -34,24 +34,24 @@ export default {
       selected: false,
       materials: [
         {
-          materialName: 'oro',
-          material: constants.gold,
+          materialName: constants.gold.name,
+          material: constants.gold.material,
         },
         {
-          materialName: 'cobre',
-          material: constants.copper,
+          materialName: constants.copper.name,
+          material: constants.copper.material,
         },
         {
-          materialName: 'aluminio',
-          material: constants.aluminum,
+          materialName: constants.aluminum.name,
+          material: constants.aluminum.material,
         },
         {
-          materialName: 'carbon',
-          material: constants.carbon,
+          materialName: constants.carbon.name,
+          material: constants.carbon.material,
         },
         {
-          materialName: 'hierro',
-          material: constants.iron,
+          materialName: constants.iron.name,
+          material: constants.iron.material,
         },
       ],
     };
