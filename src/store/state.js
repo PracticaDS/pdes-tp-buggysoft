@@ -25,6 +25,8 @@ export const materialProfits = [
   { material: constants.carbon, profit: 3 },
   { material: constants.aluminum, profit: 2 },
   { material: constants.circuit, profit: 30 },
+  { material: constants.processingUnit, profit: 100 },
+  { material: constants.robot, profit: 500 },
   { material: constants.copperWire, profit: 10 },
   { material: constants.gear, profit: 20 },
   { material: constants.processed_gold, profit: 7 },
@@ -37,22 +39,36 @@ export const materialProfits = [
 const blueprints = [
   {
     name: 'Circuito',
-    cost: 10,
-    profit: 20,
+    craftedResource: [{ material: constants.circuit, quantity: 1 }],
     resources: [{ material: constants.copper, quantity: 2 },
       { material: constants.gold, quantity: 1 }],
   },
   {
     name: 'Cable de Cobre',
-    cost: 10,
-    profit: 20,
+    craftedResource: [{ material: constants.copperWire, quantity: 1 }],
     resources: [{ material: constants.copper, quantity: 2 }],
   },
   {
     name: 'Engranaje',
-    cost: 10,
-    profit: 20,
+    craftedResource: [{ material: constants.gear, quantity: 1 }],
     resources: [{ material: constants.iron, quantity: 1 }],
+  },
+  {
+    name: 'Unidad de procesamiento',
+    craftedResource: [{ material: constants.processingUnit, quantity: 1 }],
+    resources: [{ material: constants.circuit, quantity: 2 },
+      { material: constants.processed_gold, quantity: 1 }],
+  },
+  {
+    name: 'Robot',
+    craftedResource: [{ material: constants.robot, quantity: 1 }],
+    resources: [
+      { material: constants.processed_iron, quantity: 5 },
+      { material: constants.processed_aluminum, quantity: 5 },
+      { material: constants.processingUnit, quantity: 1 },
+      { material: constants.gear, quantity: 5 },
+      { material: constants.copperWire, quantity: 5 },
+    ],
   },
 ];
 

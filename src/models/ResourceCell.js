@@ -70,7 +70,11 @@ class ResourceCell {
   }
 
   isEmpty() {
-    return !this.hasRawMaterials() && !this.hasProcessedMaterials();
+    return !Object.values(this.resources).some(quantity => quantity > 0);
+  }
+
+  hasMaterials(materials) {
+    return materials.every(({ material, quantity }) => this.resources[material] >= quantity);
   }
 }
 

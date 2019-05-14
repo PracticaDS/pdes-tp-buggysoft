@@ -91,7 +91,7 @@ export function Transporter(dao = {}) {
       Object.keys(ownResourceCell.resources).forEach((material) => {
         materialsToMove.push({ material, quantity: ownResourceCell.resources[material] });
       });
-      console.log(materialsToMove);
+
       factoryService.addResourcesInCell(nextCell, materialsToMove);
       factoryService.consumeResourcesInCell(this.position, materialsToMove);
     }
@@ -106,8 +106,20 @@ export function Crafter(dao = {}) {
     icon: 'crafter.png',
     orientation: 'down',
   };
-  function tick() {
+  function tick(resources, factoryService) {
     console.log('Tick Crafter');
+    const [row, column] = this.position;
+    const ownResourceCell = resources[row][column];
+    if (this.blueprint.name && ownResourceCell.hasMaterials(this.blueprint.craftedResource)) {
+      const nextCell = Cell.getNextCell(this.position, this.orientation);
+      factoryService.addResourcesInCell(nextCell, this.blueprint.craftedResource);
+      factoryService.consumeResourcesInCell(this.position, this.blueprint.craftedResource);
+    } else if (this.blueprint.name && ownResourceCell.hasMaterials(this.blueprint.resources)) {
+      factoryService.addResourcesInCell(this.position, this.blueprint.craftedResource);
+      factoryService.consumeResourcesInCell(this.position, this.blueprint.resources);
+    } else {
+      console.log('No blueprint selected');
+    }
   }
   const machine = new Machine({ ...defaults, ...dao }, tick);
   machine.blueprint = {};
