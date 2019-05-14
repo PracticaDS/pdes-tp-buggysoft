@@ -1,62 +1,62 @@
 export default {
   gold: {
     name: 'Oro',
-    material: 'gold'
+    material: 'gold',
   },
   copper: {
     name: 'Cobre',
-    material: 'copper'
+    material: 'copper',
   },
   aluminum: {
     name: 'Aluminio',
-    material: 'aluminum'
+    material: 'aluminum',
   },
   carbon: {
     name: 'Carbon',
-    material: 'carbon'
+    material: 'carbon',
   },
   iron: {
     name: 'Hierro',
-    material: 'iron'
+    material: 'iron',
   },
   copperWire: {
     name: 'Cable de Cobre',
-    material: 'copper_wire'
+    material: 'copper_wire',
   },
   gear: {
     name: 'Engranaje',
-    material: 'gear'
+    material: 'gear',
   },
   circuit: {
     name: 'Circuito',
-    material: 'circuit'
+    material: 'circuit',
   },
   processed_iron: {
     name: 'Hierro procesado',
-    material: 'processed_iron'
+    material: 'processed_iron',
   },
   processed_gold: {
     name: 'Oro procesado',
-    material: 'processed_gold'
+    material: 'processed_gold',
   },
   processed_carbon: {
     name: 'Carbon procesado',
-    material: 'processed_carbon'
+    material: 'processed_carbon',
   },
   processed_copper: {
     name: 'Cobre procesado',
-    material: 'processed_copper'
+    material: 'processed_copper',
   },
   processed_aluminum: {
     name: 'Aluminio procesado',
-    material: 'processed_aluminum'
+    material: 'processed_aluminum',
   },
   processingUnit: {
     name: 'Unidad de procesamiento',
-    material: 'processing_unit'
+    material: 'processing_unit',
   },
   robot: {
     name: 'Robot',
-    material: 'robot'
+    material: 'robot',
   },
 };

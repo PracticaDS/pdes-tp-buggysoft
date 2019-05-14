@@ -27,7 +27,7 @@ describe('Starter', () => {
       craftedResource: [{ material: constants.gear.material, quantity: 1 }],
       profit: 0,
       resources: [{ material: constants.iron.material, quantity: 1, materialName: constants.iron.name }],
-    }
+    };
     const crafter = Crafter({ position: [0, 0], blueprint: gearBlueprint });
 
     crafter.tick(resources, factory);
@@ -46,15 +46,15 @@ describe('Starter', () => {
       craftedResource: [{ material: constants.gear.material, quantity: 1 }],
       profit: 0,
       resources: [{ material: constants.iron.material, quantity: 1, materialName: constants.iron.name }],
-    }
+    };
     const crafter = Crafter({ position: [0, 0], blueprint: gearBlueprint });
 
     crafter.tick(resources, factory);
     expect(factory.addResourcesInCell).toHaveBeenCalledWith([0, 0], [{
-      material: constants.gear.material, quantity: 1
+      material: constants.gear.material, quantity: 1,
     }]);
     expect(factory.consumeResourcesInCell).toHaveBeenCalledWith([0, 0], [{
-      material: constants.iron.material, quantity: 1, materialName: constants.iron.name
+      material: constants.iron.material, quantity: 1, materialName: constants.iron.name,
     }]);
   });
 });
