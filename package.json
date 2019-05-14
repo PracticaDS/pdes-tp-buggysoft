@@ -9,7 +9,10 @@
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit --verbose --coverage",
     "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "preversion": "npm run test:unit && npm run lint",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
     "core-js": "^2.6.5",
