@@ -1,4 +1,5 @@
 import Cell from './Cell';
+import constants from '../constants';
 
 class Machine {
   constructor(dao = {}, tick) {
@@ -172,11 +173,11 @@ export function Furnace(dao = {}) {
   }
   const furnace = new Machine({ ...defaults, ...dao }, tick);
   furnace.transformations = {
-    gold: 'processed_gold',
-    copper: 'processed_copper',
-    aluminum: 'processed_aluminum',
-    carbon: 'processed_carbon',
-    iron: 'processed_iron',
+    gold: constants.processed_gold.material,
+    copper: constants.processed_copper.material,
+    aluminum: constants.processed_aluminum.material,
+    carbon: constants.processed_carbon.material,
+    iron: constants.processed_iron.material,
   };
   return furnace;
 }
