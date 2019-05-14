@@ -119,11 +119,11 @@ export function Crafter(dao = {}) {
       factoryService.addResourcesInCell(this.position, this.blueprint.craftedResource);
       factoryService.consumeResourcesInCell(this.position, this.blueprint.resources);
     } else {
-      console.log('No blueprint selected');
+      console.log('No blueprint selected/No materials to craft');
     }
   }
   const machine = new Machine({ ...defaults, ...dao }, tick);
-  machine.blueprint = {};
+  machine.blueprint = dao.blueprint || {};
   return machine;
 }
 
