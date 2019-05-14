@@ -10,6 +10,7 @@ class Machine {
     this.speed = dao.speed;
     this.animated = dao.animated;
     this.position = dao.position;
+    this.ticking = false;
   }
 }
 
@@ -21,6 +22,7 @@ export function Starter(dao = {}) {
     orientation: 'down',
   };
   function tick(resources, factoryService) {
+    this.ticking = false;
     console.log('Tick Starter');
     if (this.material) {
       const [row, column] = this.position;
@@ -32,6 +34,7 @@ export function Starter(dao = {}) {
         factoryService.consumeResourcesInCell(this.position,
           [{ material: this.material, quantity: 1 }]);
       } else {
+        this.ticking = true;
         factoryService.addResourcesInCell(this.position,
           [{ material: this.material, quantity: 1 }]);
       }
@@ -53,9 +56,11 @@ export function Seller(dao = {}) {
   };
   function tick(resources, factoryService) {
     console.log('Tick Seller');
+    this.ticking = false;
     const [row, column] = this.position;
     const ownResourceCell = resources[row][column];
     if (!ownResourceCell.isEmpty()) {
+      this.ticking = true;
       const cellResources = ownResourceCell.resources;
       const resourcesToSell = Object.keys(cellResources)
         .map(material => ({ material, quantity: cellResources[material] }));
@@ -75,10 +80,12 @@ export function Transporter(dao = {}) {
   };
   function tick(resources, factoryService) {
     console.log('Tick Transporter');
+    this.ticking = false;
     const [row, column] = this.position;
     const ownResourceCell = resources[row][column];
     console.log(ownResourceCell);
     if (!ownResourceCell.isEmpty()) {
+      this.ticking = true;
       const nextCell = Cell.getNextCell(this.position, this.orientation);
       const materialsToMove = [];
       Object.keys(ownResourceCell.resources).forEach((material) => {
@@ -116,6 +123,7 @@ export function Furnace(dao = {}) {
   };
   function tick(resources, factoryService) {
     console.log('Tick Furnace');
+    this.ticking = false;
     const [row, column] = this.position;
     const ownResourceCell = resources[row][column];
     if (ownResourceCell.hasProcessedMaterials()) {
@@ -134,6 +142,7 @@ export function Furnace(dao = {}) {
         [{ material: processedMaterial, quantity: 1 }]);
     } else if (ownResourceCell.hasRawMaterials()) {
       let materialToProcess;
+      this.ticking = true;
 
       Object.keys(this.transformations).forEach((rawMaterial) => {
         if (ownResourceCell.resources[rawMaterial] > 0) {

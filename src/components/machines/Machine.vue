@@ -23,6 +23,9 @@ export default {
     iconUrl() {
       return `${this.publicPath}machines/${this.machine.icon}`;
     },
+    tickIconUrl() {
+      return `${this.publicPath}machines/tick-${this.machine.icon}`;
+    },
     orientation() {
       return this.machine.orientation;
     },
