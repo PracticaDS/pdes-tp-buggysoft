@@ -45,7 +45,7 @@ export default {
       commit('setCurrentMachine', existingMachine);
       commit('setAction', 'select');
       commit('setActionOriginCell', null);
-    } else {
+    } else if (state.actionOriginCell) {
       commit('setCellMachine', cell);
       commit('clearCurrentMachine');
       commit('setCellMachine', state.actionOriginCell);
