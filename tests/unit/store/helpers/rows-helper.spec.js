@@ -27,7 +27,7 @@ describe('rows-helper.js', () => {
   });
   describe('getProfit()', () => {
     it('should return 2 for copper', () => {
-      const materialName = "copper";
+      const materialName = 'copper';
       const profit = getProfit(materialName, materialProfits);
       expect(profit).toBe(2);
     });

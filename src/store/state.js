@@ -27,6 +27,11 @@ export const materialProfits = [
   { material: constants.circuit, profit: 30 },
   { material: constants.copperWire, profit: 10 },
   { material: constants.gear, profit: 20 },
+  { material: constants.processed_gold, profit: 7 },
+  { material: constants.processed_iron, profit: 3 },
+  { material: constants.processed_copper, profit: 4 },
+  { material: constants.processed_carbon, profit: 5 },
+  { material: constants.processed_aluminum, profit: 4 },
 ];
 
 const blueprints = [

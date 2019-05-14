@@ -80,7 +80,8 @@ export default {
   text-shadow: 1px 1px 1px black;
   font-size: 6px;
   position: absolute;
-  top: 0;
+  top: 4px;
+  left: 4px;
   cursor: pointer;
 
 }
