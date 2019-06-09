@@ -18,6 +18,8 @@ html, body {
   color: $neutral-color;
   background-color: $background-color;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 #nav {
   padding: 30px;
