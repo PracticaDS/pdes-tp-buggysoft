@@ -13,7 +13,7 @@
         <td>{{ factory.updatedAt }}</td>
         <td>{{ factory.machinesNumber }}</td>
         <td>
-          <FactoryActions :deleteAction="delete" :playAction="play" :factory="factory" />
+          <FactoryActions :deleteAction="deleteFn" :playAction="playFn" :create="createFn" :factory="factory" />
         </td>
       </tr>
     </table>
@@ -30,9 +30,9 @@ export default {
   },
   props: {
     list: Array,
-    delete: Function,
-    play: Function,
-    create: Function,
+    deleteFn: Function,
+    playFn: Function,
+    createFn: Function,
   },
 };
 </script>

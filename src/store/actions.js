@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { getMachineInCell, getProfit } from './helpers/rows-helper';
+import {
+  getMachineInCell, getProfit, getRows, getResources
+} from './helpers/rows-helper';
+import { ROWS, COLUMNS } from './state';
 import { createMachine } from '@/models/Machine';
 import FactoryStoreAdapter from './helpers/store-adapter';
 
@@ -102,5 +105,11 @@ export default {
   },
   playFactory({ commit }, factory) {
     commit('setCurrentFactory', factory);
+  },
+  createFactory({ commit, state }, factory) {
+    const rows = getRows(ROWS, COLUMNS);
+    const resources = getResources(ROWS, COLUMNS);
+
+    // TO DO merge factory data, send it to backend and commit factory to vuex state
   },
 };

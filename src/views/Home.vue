@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <UserLogin v-if="!logged" :loginCallback="login"/>
-    <FactoryList v-if="logged" :list="factoryList" :delete="delete" :play="play" />
+    <FactoryList v-if="logged" :list="factoryList" :deleteFn="deleteFn" :playFn="playFn" :createFn="createFn" />
   </div>
 </template>
 
@@ -19,11 +19,14 @@ export default {
     login(username) {
       this.$store.dispatch('loginUser', username);
     },
-    delete(factory) {
+    deleteFn(factory) {
       this.$store.dispatch('deleteFactory', factory);
     },
-    play(factory) {
+    playFn(factory) {
       this.$store.dispatch('playFactory', factory);
+    },
+    createFn(factory) {
+      this.$store.dispatch('createFactory', factory);
     },
   },
   computed: {

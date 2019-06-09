@@ -2,13 +2,13 @@
   <div>
     <button
       type="button"
-      @click="play"
+      @click="playFn"
     >
       Play
     </button>
     <button
       type="button"
-      @click="delete"
+      @click="deleteFn"
     >
       Delete
     </button>
@@ -24,11 +24,11 @@ export default {
     factory: Object,
   },
   methods: {
-    delete() {
-      this.deleteAction(factory);
+    deleteFn() {
+      this.deleteAction(this.factory);
     },
-    play() {
-      this.playAction(factory);
+    playFn() {
+      this.playAction(this.factory);
     },
   },
 };
