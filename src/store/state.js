@@ -141,4 +141,5 @@ export const state = {
   resourcesToCommit: getResources(ROWS, COLUMNS),
   debug: true,
   currentUser: null,
+  factoryList: [],
 };

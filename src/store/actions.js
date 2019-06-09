@@ -91,4 +91,16 @@ export default {
         console.log(err);
       });
   },
+  deleteFactory({ commit }, factory) {
+    axios.delete(`${process.env.VUE_APP_BACKEND_URL}/factories/${factory._id}`)
+      .then(() => {
+        commit('removeFactory', factory);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  playFactory({ commit }, factory) {
+    commit('setCurrentFactory', factory);
+  },
 };
