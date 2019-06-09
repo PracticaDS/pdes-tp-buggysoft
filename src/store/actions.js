@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { getMachineInCell, getProfit } from './helpers/rows-helper';
 import { createMachine } from '@/models/Machine';
 import FactoryStoreAdapter from './helpers/store-adapter';
@@ -80,5 +81,14 @@ export default {
       + (getProfit(resource.material, state.materialProfits) * resource.quantity)
     ), 0);
     commit('increaseEarnings', profit);
+  },
+  loginUser({ commit }, username) {
+    axios.get(`${process.env.VUE_APP_BACKEND_URL}/users/${username}`)
+      .then((result) => {
+        commit('setCurrentUser', result.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };

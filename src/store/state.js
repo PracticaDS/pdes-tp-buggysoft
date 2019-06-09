@@ -140,4 +140,5 @@ export const state = {
   resources: getResources(ROWS, COLUMNS),
   resourcesToCommit: getResources(ROWS, COLUMNS),
   debug: true,
+  currentUser: null,
 };

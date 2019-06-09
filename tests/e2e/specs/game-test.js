@@ -1,9 +1,9 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('Home', () => {
+describe('Game', () => {
   it('should have a grid', () => {
-    cy.visit('/');
-    cy.get('.home')
+    cy.visit('/#/game');
+    cy.get('.game')
       .find('.grid');
   });
 });
