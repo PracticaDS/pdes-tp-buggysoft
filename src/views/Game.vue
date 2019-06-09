@@ -1,5 +1,5 @@
 <template>
-  <div class="p1">
+  <div class="game p1">
     <div class="p1">
       <span class="text-primary">Ganancias </span>
       <span class="label">${{ Number(earnings).toFixed(2) }}</span>
