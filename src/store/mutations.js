@@ -85,6 +85,7 @@ export default {
     const rows = deserializeMachineGrid(factory.machineGrid);
     const resources = deserializeResourceGrid(factory.resourceGrid);
     const resourcesTocommit = deserializeResourceGrid(factory.resourceGrid);
+    state.currentFactory = factory;
     state.rows = rows;
     state.resources = resources;
     state.resourcesToCommit = resourcesTocommit;

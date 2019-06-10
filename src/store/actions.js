@@ -2,7 +2,7 @@ import axios from 'axios';
 import constants from '../constants';
 import router from '../router';
 import {
-  getMachineInCell, getProfit, getRows, getResources,
+  getMachineInCell, getProfit, getRows, getResources, machineNumberInGrid,
 } from './helpers/rows-helper';
 import { createMachine } from '@/models/Machine';
 import FactoryStoreAdapter from './helpers/store-adapter';
@@ -138,6 +138,26 @@ export default {
       })
       .catch((err) => {
         console.log(err);
+      });
+  },
+  saveCurrentFactory({ state, commit }) {
+    commit('stopSimulation');
+    const { currentFactory } = state;
+    const updatedFactory = {
+      user: currentFactory.user,
+      name: currentFactory.name,
+      machineGrid: state.rows,
+      resourceGrid: state.resources,
+      machineNumber: machineNumberInGrid(state.rows),
+    };
+    // eslint-disable-next-line no-underscore-dangle
+    axios.patch(`${process.env.VUE_APP_BACKEND_URL}/factories/${state.currentFactory._id}`, updatedFactory)
+      .then(() => {
+        commit('startSimulation');
+      })
+      .catch((err) => {
+        console.log(err);
+        commit('startSimulation');
       });
   },
 };

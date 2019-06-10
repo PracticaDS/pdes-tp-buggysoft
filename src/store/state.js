@@ -141,4 +141,5 @@ export const state = {
   debug: true,
   currentUser: null,
   factoryList: [],
+  currentFactory: null,
 };

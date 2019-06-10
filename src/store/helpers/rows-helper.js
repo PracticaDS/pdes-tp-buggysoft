@@ -84,8 +84,18 @@ function deserializeResourceGrid(serializedGrid) {
   return deserializedGrid;
 }
 
+function machineNumberInGrid(grid) {
+  // eslint-disable-next-line
+  return grid.reduce((accummulator, column) => {
+    // eslint-disable-next-line
+    return column.reduce((acc, element) => {
+      return element.hasMachine() ? acc + 1 : acc;
+    }, accummulator);
+  }, 0);
+}
+
 export {
   getRow, getResourcesRow, getRows, getResources, getCell, getMachineInCell,
   getResourcesCell, getMaterialConverter, getProfit, deserializeMachineGrid,
-  deserializeResourceGrid,
+  deserializeResourceGrid, machineNumberInGrid,
 };

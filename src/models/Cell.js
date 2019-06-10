@@ -1,3 +1,5 @@
+import { createMachine } from './Machine';
+
 class Cell {
   constructor(position, machine = {}) {
     this.position = position;
@@ -35,7 +37,7 @@ class Cell {
   }
 
   readSerializedData(serializedData) {
-    this.machine = serializedData.machine || {};
+    this.machine = serializedData.machine ? createMachine(serializedData.machine) : {};
   }
 }
 

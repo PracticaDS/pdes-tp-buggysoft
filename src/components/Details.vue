@@ -1,5 +1,6 @@
 <template>
   <div class="details toolbar">
+    <Controls />
     <p class="text-primary hp1">Detalles</p>
     <div class="section text-small" v-if="currentMachine.name">
       <div class="label">{{currentMachine.name}}</div>
@@ -12,8 +13,13 @@
   </div>
 </template>
 <script>
+import Controls from '@/components/Controls.vue';
+
 export default {
   name: 'Details',
+  components: {
+    Controls,
+  },
   props: {
     currentMachine: Object,
   },
