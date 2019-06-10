@@ -7,6 +7,7 @@
       :deleteFn="deleteFn"
       :playFn="playFn"
       :createFn="createFn"
+      :username="username"
     />
   </div>
 </template>
@@ -41,6 +42,9 @@ export default {
     },
     factoryList() {
       return this.$store.state.factoryList;
+    },
+    username() {
+      return this.$store.state.currentUser.username;
     },
   },
 };

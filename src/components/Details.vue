@@ -1,6 +1,13 @@
 <template>
   <div class="details toolbar">
-    <Controls />
+    <Controls
+      :startSimulation="startSimulation"
+      :stopSimulation="stopSimulation"
+      :saveCurrentFactory="saveCurrentFactory"
+      :running="running"
+      :autosave="autosave"
+      :toggleAutosave="toggleAutosave"
+    />
     <p class="text-primary hp1">Detalles</p>
     <div class="section text-small" v-if="currentMachine.name">
       <div class="label">{{currentMachine.name}}</div>
@@ -22,6 +29,12 @@ export default {
   },
   props: {
     currentMachine: Object,
+    startSimulation: Function,
+    stopSimulation: Function,
+    saveCurrentFactory: Function,
+    running: Boolean,
+    autosave: Boolean,
+    toggleAutosave: Function,
   },
 };
 </script>

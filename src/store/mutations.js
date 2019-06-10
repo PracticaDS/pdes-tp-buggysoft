@@ -93,4 +93,20 @@ export default {
   setUserFactories(state, factories) {
     state.factoryList = factories;
   },
+  modifyAutosaveInterval(state, newInterval) {
+    state.autosaveInterval = newInterval;
+  },
+  savingStart(state) {
+    state.saving = true;
+  },
+  savingEnd(state) {
+    state.saving = false;
+  },
+  saveError(state, error) {
+    const errorObj = {
+      date: new Date(),
+      error,
+    };
+    state.errors.push(errorObj);
+  },
 };

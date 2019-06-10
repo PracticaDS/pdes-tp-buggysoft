@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="title">
-      FactoryList
+      Hola {{username}}! Estas son tus fabricas:
     </div>
     <FactoryCreationButton :createAction="createFn" />
     <div class="data-table">
@@ -45,6 +45,7 @@ export default {
     deleteFn: Function,
     playFn: Function,
     createFn: Function,
+    username: String,
   },
 };
 </script>
