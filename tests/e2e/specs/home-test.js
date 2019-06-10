@@ -23,11 +23,4 @@ describe('Home', () => {
     cy.get('.title').should('exist');
     cy.get('table').should('exist');
   });
-
-  it('Should change the currentUser if a new user is inputed', () => {
-    cy.visit('/');
-    cy.get('input').type('pepe').trigger('change');
-    cy.get('button').click();
-    cy.get('table').should('exist');
-  });
 });
