@@ -1,10 +1,13 @@
 import axios from 'axios';
+import constants from '../constants';
+import router from '../router';
 import {
-  getMachineInCell, getProfit, getRows, getResources
+  getMachineInCell, getProfit, getRows, getResources,
 } from './helpers/rows-helper';
-import { ROWS, COLUMNS } from './state';
 import { createMachine } from '@/models/Machine';
 import FactoryStoreAdapter from './helpers/store-adapter';
+
+export const { ROWS, COLUMNS } = constants;
 
 export default {
   applyActionToCell({ commit, state }, cell) {
@@ -85,19 +88,29 @@ export default {
     ), 0);
     commit('increaseEarnings', profit);
   },
-  loginUser({ commit }, username) {
+  loginUser({ commit, dispatch }, username) {
     axios.get(`${process.env.VUE_APP_BACKEND_URL}/users/${username}`)
       .then((result) => {
         commit('setCurrentUser', result.data);
+        dispatch('getUserFactories');
       })
       .catch((err) => {
         console.log(err);
       });
   },
-  deleteFactory({ commit }, factory) {
+  getUserFactories({ commit, state }) {
+    axios.get(`${process.env.VUE_APP_BACKEND_URL}/factories/?user=${state.currentUser.username}`)
+      .then((result) => {
+        commit('setUserFactories', result.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  deleteFactory({ dispatch }, factory) {
     axios.delete(`${process.env.VUE_APP_BACKEND_URL}/factories/${factory._id}`)
       .then(() => {
-        commit('removeFactory', factory);
+        dispatch('getUserFactories');
       })
       .catch((err) => {
         console.log(err);
@@ -105,11 +118,25 @@ export default {
   },
   playFactory({ commit }, factory) {
     commit('setCurrentFactory', factory);
+    router.push('/game');
   },
-  createFactory({ commit, state }, factory) {
+  createFactory({ dispatch, state }, { name }) {
     const rows = getRows(ROWS, COLUMNS);
     const resources = getResources(ROWS, COLUMNS);
+    const factory = {
+      user: state.currentUser,
+      name,
+      machineGrid: rows,
+      resourceGrid: resources,
+      machineNumber: 0,
+    };
 
-    // TO DO merge factory data, send it to backend and commit factory to vuex state
+    axios.post(`${process.env.VUE_APP_BACKEND_URL}/factories/`, factory)
+      .then(() => {
+        dispatch('getUserFactories');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };

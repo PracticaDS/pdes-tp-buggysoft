@@ -54,7 +54,38 @@ function getProfit(materialName, materialProfits) {
   return res.profit || 0;
 }
 
+function deserializeMachineGrid(serializedGrid) {
+  const ROWS = serializedGrid.length;
+  const COLUMNS = serializedGrid[0].length;
+  const deserializedGrid = getRows(ROWS, COLUMNS);
+
+  serializedGrid.forEach((column) => {
+    column.forEach((element) => {
+      const [row, col] = element.position;
+      deserializedGrid[row][col].readSerializedData(element);
+    });
+  });
+
+  return deserializedGrid;
+}
+
+function deserializeResourceGrid(serializedGrid) {
+  const ROWS = serializedGrid.length;
+  const COLUMNS = serializedGrid[0].length;
+  const deserializedGrid = getResources(ROWS, COLUMNS);
+
+  serializedGrid.forEach((column) => {
+    column.forEach((element) => {
+      const [row, col] = element.position;
+      deserializedGrid[row][col].readSerializedData(element);
+    });
+  });
+
+  return deserializedGrid;
+}
+
 export {
   getRow, getResourcesRow, getRows, getResources, getCell, getMachineInCell,
-  getResourcesCell, getMaterialConverter, getProfit,
+  getResourcesCell, getMaterialConverter, getProfit, deserializeMachineGrid,
+  deserializeResourceGrid,
 };

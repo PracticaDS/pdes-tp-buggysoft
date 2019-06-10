@@ -3,8 +3,7 @@ import constants from '../constants';
 import { getRows, getResources } from './helpers/rows-helper';
 import { createMachine } from '@/models/Machine';
 
-export const ROWS = 12;
-export const COLUMNS = 12;
+export const { ROWS, COLUMNS } = constants;
 
 const {
   place, select, remove, move, rotate,

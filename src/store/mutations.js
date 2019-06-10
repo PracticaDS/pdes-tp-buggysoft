@@ -1,4 +1,5 @@
 import { createMachine } from '@/models/Machine';
+import { deserializeMachineGrid, deserializeResourceGrid } from './helpers/rows-helper';
 import Vue from 'vue';
 
 export default {
@@ -79,5 +80,16 @@ export default {
   },
   setCurrentUser(state, user) {
     state.currentUser = user;
+  },
+  setCurrentFactory(state, factory) {
+    const rows = deserializeMachineGrid(factory.machineGrid);
+    const resources = deserializeResourceGrid(factory.resourceGrid);
+    const resourcesTocommit = deserializeResourceGrid(factory.resourceGrid);
+    state.rows = rows;
+    state.resources = resources;
+    state.resourcesToCommit = resourcesTocommit;
+  },
+  setUserFactories(state, factories) {
+    state.factoryList = factories;
   },
 };

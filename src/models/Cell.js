@@ -29,6 +29,14 @@ class Cell {
     };
     return movements[orientation](position);
   }
+
+  hasMachine() {
+    return Object.keys(this.machine).length !== 0;
+  }
+
+  readSerializedData(serializedData) {
+    this.machine = serializedData.machine || {};
+  }
 }
 
 export default Cell;
