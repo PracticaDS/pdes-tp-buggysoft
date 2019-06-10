@@ -108,6 +108,7 @@ export default {
       });
   },
   deleteFactory({ dispatch }, factory) {
+    // eslint-disable-next-line no-underscore-dangle
     axios.delete(`${process.env.VUE_APP_BACKEND_URL}/factories/${factory._id}`)
       .then(() => {
         dispatch('getUserFactories');

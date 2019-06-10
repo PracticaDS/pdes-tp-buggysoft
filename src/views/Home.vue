@@ -1,7 +1,13 @@
 <template>
   <div class="home">
     <UserLogin v-if="!logged" :loginCallback="login"/>
-    <FactoryList v-if="logged" :list="factoryList" :deleteFn="deleteFn" :playFn="playFn" :createFn="createFn" />
+    <FactoryList
+      v-if="logged"
+      :list="factoryList"
+      :deleteFn="deleteFn"
+      :playFn="playFn"
+      :createFn="createFn"
+    />
   </div>
 </template>
 
@@ -35,7 +41,7 @@ export default {
     },
     factoryList() {
       return this.$store.state.factoryList;
-    }
+    },
   },
 };
 </script>
