@@ -76,6 +76,12 @@ class ResourceCell {
   hasMaterials(materials) {
     return materials.every(({ material, quantity }) => this.resources[material] >= quantity);
   }
+
+  readSerializedData(serializedData) {
+    Object.keys(serializedData.resources).forEach((key) => {
+      this.resources[key] = serializedData.resources[key];
+    });
+  }
 }
 
 export default ResourceCell;

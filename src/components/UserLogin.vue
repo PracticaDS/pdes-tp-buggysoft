@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'game',
+  name: 'UserLogin',
   data() {
     return {
       username: '',

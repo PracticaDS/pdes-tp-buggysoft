@@ -59,4 +59,6 @@ export default {
     name: 'Robot',
     material: 'robot',
   },
+  ROWS: 12,
+  COLUMNS: 12,
 };
