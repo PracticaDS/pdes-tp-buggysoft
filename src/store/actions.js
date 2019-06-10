@@ -1,6 +1,5 @@
 import axios from 'axios';
 import constants from '../constants';
-import router from '../router';
 import {
   getMachineInCell, getProfit, getRows, getResources, machineNumberInGrid,
 } from './helpers/rows-helper';
@@ -117,7 +116,7 @@ export default {
         commit('saveError', err);
       });
   },
-  playFactory({ commit }, factory) {
+  playFactory({ commit }, { factory, router }) {
     commit('setCurrentFactory', factory);
     router.push('/game');
   },

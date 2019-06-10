@@ -30,7 +30,7 @@ export default {
       this.$store.dispatch('deleteFactory', factory);
     },
     playFn(factory) {
-      this.$store.dispatch('playFactory', factory);
+      this.$store.dispatch('playFactory', { factory, router: this.$router });
     },
     createFn(factory) {
       this.$store.dispatch('createFactory', factory);
