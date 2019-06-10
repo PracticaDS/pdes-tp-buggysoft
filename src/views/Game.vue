@@ -7,7 +7,15 @@
     <div class="flex">
       <ToolBox />
       <Factory :rows="rows"/>
-      <Details :currentMachine="currentMachine"/>
+      <Details
+        :currentMachine="currentMachine"
+        :startSimulation="startSimulation"
+        :stopSimulation="stopSimulation"
+        :saveCurrentFactory="saveCurrentFactory"
+        :running="running"
+        :autosave="!!autosaveInterval"
+        :toggleAutosave="toggleAutosave"
+      />
     </div>
     <footer>
       <p class="text-small subtle">A game developed by</p>
@@ -17,7 +25,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import Details from '@/components/Details.vue';
 import Factory from '@/components/Factory-Wrapper.vue';
 import ToolBox from '@/components/Toolbox.vue';
@@ -34,7 +42,20 @@ export default {
     'rows',
     'machines',
     'currentMachine',
+    'running',
+    'autosaveInterval',
   ]),
+  methods: {
+    ...mapMutations([
+      'startSimulation',
+      'stopSimulation',
+      'toggleAutosave',
+    ]),
+    ...mapActions([
+      'saveCurrentFactory',
+      'toggleAutosave',
+    ]),
+  },
 };
 </script>
 

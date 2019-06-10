@@ -95,7 +95,7 @@ export default {
         dispatch('getUserFactories');
       })
       .catch((err) => {
-        console.log(err);
+        commit('saveError', err);
       });
   },
   getUserFactories({ commit, state }) {
@@ -104,24 +104,24 @@ export default {
         commit('setUserFactories', result.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        commit('saveError', err);
       });
   },
-  deleteFactory({ dispatch }, factory) {
+  deleteFactory({ commit, dispatch }, factory) {
     // eslint-disable-next-line no-underscore-dangle
     axios.delete(`${process.env.VUE_APP_BACKEND_URL}/factories/${factory._id}`)
       .then(() => {
         dispatch('getUserFactories');
       })
       .catch((err) => {
-        console.log(err);
+        commit('saveError', err);
       });
   },
   playFactory({ commit }, factory) {
     commit('setCurrentFactory', factory);
     router.push('/game');
   },
-  createFactory({ dispatch, state }, { name }) {
+  createFactory({ commit, dispatch, state }, { name }) {
     const rows = getRows(ROWS, COLUMNS);
     const resources = getResources(ROWS, COLUMNS);
     const factory = {
@@ -137,10 +137,11 @@ export default {
         dispatch('getUserFactories');
       })
       .catch((err) => {
-        console.log(err);
+        commit('saveError', err);
       });
   },
   saveCurrentFactory({ state, commit }) {
+    const wasRunning = state.running;
     commit('stopSimulation');
     const { currentFactory } = state;
     const updatedFactory = {
@@ -150,14 +151,26 @@ export default {
       resourceGrid: state.resources,
       machineNumber: machineNumberInGrid(state.rows),
     };
+    commit('savingStart');
     // eslint-disable-next-line no-underscore-dangle
     axios.patch(`${process.env.VUE_APP_BACKEND_URL}/factories/${state.currentFactory._id}`, updatedFactory)
       .then(() => {
-        commit('startSimulation');
+        commit('savingEnd');
+        if (wasRunning) commit('startSimulation');
       })
       .catch((err) => {
-        console.log(err);
-        commit('startSimulation');
+        commit('saveError', err);
+        commit('savingEnd');
+        if (wasRunning) commit('startSimulation');
       });
+  },
+  toggleAutosave({ commit, dispatch, state }) {
+    if (state.autosaveInterval) {
+      clearInterval(state.autosaveInterval);
+      commit('modifyAutosaveInterval', null);
+    } else {
+      const autosaveInterval = setInterval(() => dispatch('saveCurrentFactory'), state.autosaveDelay);
+      commit('modifyAutosaveInterval', autosaveInterval);
+    }
   },
 };

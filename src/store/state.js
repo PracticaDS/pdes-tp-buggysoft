@@ -122,6 +122,9 @@ export const state = {
   earnings: 1000,
   tickDelay: 1000,
   running: true,
+  saving: false,
+  autosaveInterval: null,
+  autosaveDelay: 30000,
   currentMachine: {},
   action: 'place',
   actionOriginCell: null,
@@ -142,4 +145,5 @@ export const state = {
   currentUser: null,
   factoryList: [],
   currentFactory: null,
+  errors: [],
 };
