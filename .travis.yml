@@ -15,9 +15,9 @@ before_script:
 script:
   - npm run lint
   - npm run test:unit
-  - npm run test:e2e -- --headless
+  # - npm run test:e2e -- --headless
 before_deploy:
-  - npm run build
+  - BASE_PATH=/pdes-tp-buggysoft/ npm run build
 deploy:
   provider: pages
   skip_cleanup: true

@@ -1,7 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/pdes-tp-buggysoft/'
-    : '/',
+  publicPath: process.env.BASE_PATH || '/',
   css: {
     loaderOptions: {
       sass: {
