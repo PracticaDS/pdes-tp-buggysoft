@@ -1,13 +1,12 @@
 language: node_js
 node_js:
-  - "10.15.1"
+  - 10.16.0
+services:
+  - docker
 cache:
-  # Caches $HOME/.npm when npm ci is default script command
-  # Caches node_modules in all other cases
   npm: true
   directories:
-    # we also need to cache folder with Cypress binary
-    - ~/.cache
+  - "~/.cache"
 install:
   - npm ci
 before_script:
@@ -15,14 +14,21 @@ before_script:
 script:
   - npm run lint
   - npm run test:unit
-  # - npm run test:e2e -- --headless
 before_deploy:
   - BASE_PATH=/pdes-tp-buggysoft/ npm run build
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep_history: true
-  local_dir: dist
-  on:
-    branch: master
+  - provider: pages
+    skip_cleanup: true
+    github_token: "$GITHUB_TOKEN"
+    keep_history: true
+    local_dir: dist
+    on:
+      branch: master
+  - provider: script
+    script: bash docker_push.sh
+    on:
+      branch: master
+env:
+  global:
+  - secure: cynPH0cfRr2uXMlZXFTexBRAX1pCfss6aDJKN7l6cEg4VRWsj0yCzRCOTuW0g8rM8ShNxeE3l55bNT7JghcQXrMG4IKWl5bk7qvrsr+I51cvG6liQNpd4u7/r8NH6SlDCvtZHB6/eKaaG0AQzuY0fEP0AJ9uxMC23KfCxs2aqXcRpcLQ0gvegFSdBG6LLag9sBncdhgZI8YtV1G/rgwBKuD1niPuAaCHMefUuO3MyhOTghj4meVZClnYX0VOc5UPM240AsZSnLMbOcON7LbusVujWkqthGdXjXHQsuGzHqjrPKz57XjzuAC8JbUpvj2GtFoNKTmfrqG1gLc0mNcUvycS33c0OLVM2eiuEvGfACSrKcmGXNT61C0s3ReOr6zUtdjlUmS1equxEDAeSRx7HagDdEiYM9DhTfblG0bPOpexvEJcRTQkFHsTWREQtLAZiqqw5/KN9bUuCE9R6I1Obwt7kP9+Yi4FSHLHlrqcN9djRBrRDFm0aaeMEEz15E38GVepARCzViZlDtsNAKl7jIsf/fFuCAqCowuwEWlP0gSxpvb3boqiEFcB5wTFDs+t+MsrJaiKF5DSxqWSi+xrSoLSsIDSe/7x1PqW6ZWasgdVCMcnXL4i+hAqvwg0XIXXJydjRxfRk3FMASgVkN0iZNYSd+bWwTXYcPTPn+l6Gv4=
+  - secure: jo47W1GOJlq2mNtkhd3gfvw2QPBn4/VHS0REbfPkjarmiw4he3+LP8fCUDSoKAoZsbm1cbFohRkglDopedukGT409cQ062eBUV9eF6Kb9lZyaTn2ZcZNjYnijXCZr1NUMrum3Z3DT74EifeU+LptFRY+3NF+NgfW/QZHKaenPYYonbpHPcJXiLlev5g+LgCPrujQGV1w0nJpan6Hxtw+AtTIAQi17Ky/50gpN/s43gTqN5XUciqo0jNrwt3rQl0hD6nw8H9rmRRKqHfa98vtFpyDVz/s82H6oRvcHDIIOlbG/2MQVS9T6R3rJ6U5OjpWKMevdjSVQnZheaYlnG1wxQWRJY244la8Uw9+Gugqi6jmBNWZbiF2FlO010A/5MlLzpHBGTmbzNlVzUME9SAxg+2heC9dG2wiT9N7WPYH9c/+5dwWplYaDF6BaSAfa9+CZfCi/Yz2R2kaAC/WWduooNK0oT5dnwyBB7PwQIwBrcAHowFGq8T830bihOOUf6syCO1H/VyjsB4+jobLOSD7FvZQ0vGiVP9YW8MAiEzQqROxbM3yo1ePbu6z+CkAy7bFnwVjGZYdDAKfcPPEqK2zZ4rawrc8tAyQHRZw9E+0aRNlci/C4PmbbkMcADUydUMbfmgoPGrHpjv3/mhNgcH8CwxoXLHRp2ifvFORltdgsdI=
