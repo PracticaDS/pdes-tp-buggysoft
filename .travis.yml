@@ -36,7 +36,7 @@ deploy:
     secret_access_key: "$AWS_SECRET"
     access_key_id: "$AWS_ID"
     on:
-      branch: master
+      branch: zarlanga
 env:
   global:
   - secure: cynPH0cfRr2uXMlZXFTexBRAX1pCfss6aDJKN7l6cEg4VRWsj0yCzRCOTuW0g8rM8ShNxeE3l55bNT7JghcQXrMG4IKWl5bk7qvrsr+I51cvG6liQNpd4u7/r8NH6SlDCvtZHB6/eKaaG0AQzuY0fEP0AJ9uxMC23KfCxs2aqXcRpcLQ0gvegFSdBG6LLag9sBncdhgZI8YtV1G/rgwBKuD1niPuAaCHMefUuO3MyhOTghj4meVZClnYX0VOc5UPM240AsZSnLMbOcON7LbusVujWkqthGdXjXHQsuGzHqjrPKz57XjzuAC8JbUpvj2GtFoNKTmfrqG1gLc0mNcUvycS33c0OLVM2eiuEvGfACSrKcmGXNT61C0s3ReOr6zUtdjlUmS1equxEDAeSRx7HagDdEiYM9DhTfblG0bPOpexvEJcRTQkFHsTWREQtLAZiqqw5/KN9bUuCE9R6I1Obwt7kP9+Yi4FSHLHlrqcN9djRBrRDFm0aaeMEEz15E38GVepARCzViZlDtsNAKl7jIsf/fFuCAqCowuwEWlP0gSxpvb3boqiEFcB5wTFDs+t+MsrJaiKF5DSxqWSi+xrSoLSsIDSe/7x1PqW6ZWasgdVCMcnXL4i+hAqvwg0XIXXJydjRxfRk3FMASgVkN0iZNYSd+bWwTXYcPTPn+l6Gv4=
