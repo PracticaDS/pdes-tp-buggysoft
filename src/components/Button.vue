@@ -50,7 +50,7 @@ export default {
     &:hover {
       transform: scale(1.2, 1.2);
     }
-    &:focus, &:active, &.active {
+    &:focus, &:active, &.active, &.rounded.active {
       background-color: $primary-color;
       border: 1px solid $primary-color;
       outline: 1px solid $primary-color;

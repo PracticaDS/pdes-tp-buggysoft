@@ -2,20 +2,22 @@
   <div>
     <p class="text-primary hp1">Controles</p>
     <div class="section no-padding centered">
-      <Button v-if="!running" @click="startSimulation">Play</Button>
-      <Button v-if="running" @click="stopSimulation">Stop</Button>
-      <Button @click="saveCurrentFactory">Save</Button>
-      <Button @click="toggleAutosave">Autosave {{ autosave ? 'ON' : 'OFF' }}</Button>
+      <TextButton v-if="running" @click="stopSimulation" :active="running">Stop</TextButton>
+      <TextButton v-else @click="startSimulation">Play</TextButton>
+      <TextButton @click="saveCurrentFactory">Save</TextButton>
+      <TextButton @click="toggleAutosave" :active="autosave">
+        Autosave <span class="active-text">{{ autosave ? 'ON' : 'OFF' }}</span>
+      </TextButton>
     </div>
   </div>
 </template>
 <script>
-import Button from '@/components/Button.vue';
+import TextButton from '@/components/TextButton.vue';
 
 export default {
   name: 'Controls',
   components: {
-    Button,
+    TextButton,
   },
   props: {
     startSimulation: Function,
@@ -35,5 +37,8 @@ export default {
   align-items: center;
   width: 20vw;
   padding: 12px;
+}
+.active-text {
+  color: $neutral-color;
 }
 </style>
