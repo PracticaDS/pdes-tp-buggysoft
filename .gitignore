@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+/buildS3
 /coverage
 
 /tests/e2e/videos/
